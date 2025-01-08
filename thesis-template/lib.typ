@@ -43,6 +43,7 @@
 
   body
 ) = {
+  // TODO: fix this code position because i will move things around
   show link: it => {
     if underline-links == 3 {
       underline[#it]
@@ -61,7 +62,7 @@
   // Enums numbering
   set enum(numbering: "1)a)i)")
 
-    // Tables & figures
+  // Tables & figures
   show figure: set block(spacing: 15.5pt)
   show figure: set place(clearance: 15.5pt)
 
@@ -108,21 +109,20 @@
   )
 
   // Configure the page and multi-column properties.
-  set columns(gutter: 12pt)
-  set page(
-    columns: 2,
-    paper: paper-size,
-    // The margins depend on the paper size.
-    margin: if paper-size == "a4" {
-      (x: 41.5pt, top: 80.51pt, bottom: 89.51pt)
-    } else {
-      (
-        x: (50pt / 216mm) * 100%,
-        top: (55pt / 279mm) * 100%,
-        bottom: (64pt / 279mm) * 100%,
-      )
-    }
-  )
+  // set columns(gutter: 12pt)
+  // set page(
+  //   paper: paper-size,
+  //   // The margins depend on the paper size.
+  //   margin: if paper-size == "a4" {
+  //     (x: 41.5pt, top: 80.51pt, bottom: 89.51pt)
+  //   } else {
+  //     (
+  //       x: (50pt / 216mm) * 100%,
+  //       top: (55pt / 279mm) * 100%,
+  //       bottom: (64pt / 279mm) * 100%,
+  //     )
+  //   }
+  // )
 
   // Configure equation numbering and spacing.
   set math.equation(numbering: "(1)")
@@ -158,59 +158,73 @@
   // ORIGINALLY:
   // set heading(numbering: "I.A.1)")
   // CHANGE:
-  set heading(numbering: "I.A.1)", supplement: section-reference-supplement)
+  set heading(numbering: "1.1.1.", supplement: section-reference-supplement)
+
+  // show heading: it => {
+  //   let levels = counter(heading).get()
+  //   let deepest = if levels != () {
+  //     levels.last()
+  //   } else {
+  //     1
+  //   }
+
+  //   if it.level == 1 {
+  //     numbering("1")
+  //     it
+  //   }
+  // }
   
-  show heading: it => {
-    // Find out the final number of the heading counter.
-    let levels = counter(heading).get()
-    let deepest = if levels != () {
-      levels.last()
-    } else {
-      1
-    }
+  // TODO: fix heading
+  // show heading: it => {
+  //   // Find out the final number of the heading counter.
+  //   let levels = counter(heading).get()
+  //   let deepest = if levels != () {
+  //     levels.last()
+  //   } else {
+  //     1
+  //   }
 
-    set text(10pt, weight: 400)
-    if it.level == 1 {
-      // First-level headings are centered smallcaps.
-      // We don't want to number the acknowledgment section.
-      // ORIGINALLY:
-      // let is-ack = it.body in ([Acknowledgment], [Acknowledgement], [Acknowledgments], [Acknowledgements])
-      // CHANGE:
-      // also without diacritics
-      let is-ack = it.body in ([Poďakovanie], [Poďakovania], [Podakovanie], [Podakovania])
+  //   set text(10pt, weight: 400)
+  //   if it.level == 1 {
 
-      set align(center)
-      set text(if is-ack { 10pt } else { 11pt })
-      show: block.with(above: 15pt, below: 13.75pt, sticky: true)
-      show: smallcaps
-      if it.numbering != none and not is-ack {
-        numbering("I.", deepest)
-        h(7pt, weak: true)
-      }
-      it.body
-    } else if it.level == 2 {
-      // Second-level headings are run-ins.
-      set par(first-line-indent: 0pt)
-      set text(style: "italic")
-      show: block.with(spacing: 10pt, sticky: true)
-      if it.numbering != none {
-        numbering("A.", deepest)
-        h(7pt, weak: true)
-      }
-      it.body
-    } else [
-      // Third level headings are run-ins too, but different.
-      #if it.level == 3 {
-        // ORIGINALLY:
-        // numbering("a)", deepest)
-        // CHANGE:
-        numbering("1)", deepest)
+  //     // TODO: fix acknowledgment
 
-        [ ]
-      }
-      _#(it.body):_
-    ]
-  }
+  //     // First-level headings are centered smallcaps.
+  //     // We don't want to number the acknowledgment section.
+  //     // ORIGINALLY:
+  //     // let is-ack = it.body in ([Acknowledgment], [Acknowledgement], [Acknowledgments], [Acknowledgements])
+  //     // CHANGE:
+  //     // also without diacritics
+  //     let is-ack = it.body in ([Poďakovanie], [Poďakovania], [Podakovanie], [Podakovania], [List of abbreviations], [Zoznam skratiek], [Zoznam použitých skratiek])
+
+  //     set align(left)
+  //     set text(if is-ack { 10pt } else { 11pt })
+  //     show: block.with(above: 15pt, below: 13.75pt, sticky: true)
+  //     // show: smallcaps
+  //     if it.numbering != none and not is-ack {
+  //       numbering("1", deepest)
+  //       h(7pt, weak: true)
+  //     }
+  //     it.body
+  //   } else if it.level == 2 {
+  //     // Second-level headings are run-ins.
+  //     set par(first-line-indent: 0pt)
+  //     // set text(style: "italic")
+  //     show: block.with(spacing: 10pt, sticky: true)
+  //     if it.numbering != none {
+  //       numbering("1.", deepest)
+  //       h(7pt, weak: true)
+  //     }
+  //     it.body
+  //   } else [
+  //     #if it.level == 3 {
+  //       numbering("1.", deepest)
+
+  //       [ ]
+  //     }
+  //     _#(it.body):_
+  //   ]
+  // }
 
   // Style bibliography.
   show std.bibliography: set text(8pt)
@@ -224,52 +238,52 @@
   // Display the paper's title and authors at the top of the page,
   // spanning all columns (hence floating at the scope of the
   // columns' parent, which is the page).
-  place(
-    top,
-    float: true,
-    scope: "parent",
-    clearance: 30pt,
-    {
-      v(3pt, weak: true)
-      align(center, par(leading: 0.5em, text(size: 24pt, title)))
-      v(8.35mm, weak: true)
+  // place(
+  //   top,
+  //   float: true,
+  //   scope: "parent",
+  //   clearance: 30pt,
+  //   {
+  //     v(3pt, weak: true)
+  //     align(center, par(leading: 0.5em, text(size: 24pt, title)))
+  //     v(8.35mm, weak: true)
 
-      // Display the authors list.
-      set par(leading: 0.6em)
-      for i in range(calc.ceil(author.len() / 3)) {
-        let end = calc.min((i + 1) * 3, author.len())
-        let is-last = author.len() == end
-        let slice = author.slice(i * 3, end)
-        grid(
-          columns: slice.len() * (1fr,),
-          gutter: 12pt,
-          ..slice.map(author => align(center, {
-            text(size: 11pt, author.name)
-            if "department" in author [
-              \ #emph(author.department)
-            ]
-            if "organization" in author [
-              \ #emph(author.organization)
-            ]
-            if "location" in author [
-              \ #author.location
-            ]
-            if "email" in author {
-              if type(author.email) == str [
-                \ #link("mailto:" + author.email)
-              ] else [
-                \ #author.email
-              ]
-            }
-          }))
-        )
+  //     // Display the authors list.
+  //     set par(leading: 0.6em)
+  //     for i in range(calc.ceil(author.len() / 3)) {
+  //       let end = calc.min((i + 1) * 3, author.len())
+  //       let is-last = author.len() == end
+  //       let slice = author.slice(i * 3, end)
+  //       grid(
+  //         columns: slice.len() * (1fr,),
+  //         gutter: 12pt,
+  //         ..slice.map(author => align(center, {
+  //           text(size: 11pt, author.name)
+  //           if "department" in author [
+  //             \ #emph(author.department)
+  //           ]
+  //           if "organization" in author [
+  //             \ #emph(author.organization)
+  //           ]
+  //           if "location" in author [
+  //             \ #author.location
+  //           ]
+  //           if "email" in author {
+  //             if type(author.email) == str [
+  //               \ #link("mailto:" + author.email)
+  //             ] else [
+  //               \ #author.email
+  //             ]
+  //           }
+  //         }))
+  //       )
 
-        if not is-last {
-          v(16pt, weak: true)
-        }
-      }
-    }
-  )
+  //       if not is-last {
+  //         v(16pt, weak: true)
+  //       }
+  //     }
+  //   }
+  // )
 
   // Configure paragraph properties.
   set par(spacing: 0.45em, justify: true, first-line-indent: 1em, leading: 0.45em)
@@ -283,36 +297,39 @@
     }
   }
 
-  // Display abstract and index terms.
-  if abstract != none [
-    #set text(9pt, weight: 700, spacing: 150%)
-    // ORIGINALLY:
-    // #h(1em) _Abstract_---#h(weak: true, 0pt)#abstract
-    // CHANGE:
-    // #emph[text] == italic same as using _text_
-    #if abstract-name-slovak == true [
-      #h(1em) _Abstrakt_---#h(weak: true, 0pt)#abstract
-    ] else if abstract-name-slovak == false [
-      #h(1em) _Abstract_---#h(weak: true, 0pt)#abstract
-    ] else [
-      #h(1em) #emph[#abstract-name-slovak]---#h(weak: true, 0pt)#abstract
-    ]
 
-    #if index-terms != () [
-      // ORIGINALLY:
-      // #h(.3em)_Index Terms_---#h(weak: true, 0pt)#index-terms.join(", ")
-      // CHANGE:
-      // #emph[text] == italic same as using _text_
-      #if index-terms-name-slovak == true [
-        #h(.3em)_Kľúčové slová_---#h(weak: true, 0pt)#index-terms.join(", ")
-      ] else if index-terms-name-slovak == false [
-        #h(.3em)_Index Terms_---#h(weak: true, 0pt)#index-terms.join(", ")
-      ] else [
-        #h(.3em)#emph[#index-terms-name-slovak]---#h(weak: true, 0pt)#index-terms.join(", ")
-      ]
-    ]
-    #v(2pt)
-  ]
+  // TODO: fix/change/remove
+
+  // Display abstract and index terms.
+  // if abstract != none [
+  //   #set text(9pt, weight: 700, spacing: 150%)
+  //   // ORIGINALLY:
+  //   // #h(1em) _Abstract_---#h(weak: true, 0pt)#abstract
+  //   // CHANGE:
+  //   // #emph[text] == italic same as using _text_
+  //   #if abstract-name-slovak == true [
+  //     #h(1em) _Abstrakt_---#h(weak: true, 0pt)#abstract
+  //   ] else if abstract-name-slovak == false [
+  //     #h(1em) _Abstract_---#h(weak: true, 0pt)#abstract
+  //   ] else [
+  //     #h(1em) #emph[#abstract-name-slovak]---#h(weak: true, 0pt)#abstract
+  //   ]
+
+  //   #if index-terms != () [
+  //     // ORIGINALLY:
+  //     // #h(.3em)_Index Terms_---#h(weak: true, 0pt)#index-terms.join(", ")
+  //     // CHANGE:
+  //     // #emph[text] == italic same as using _text_
+  //     #if index-terms-name-slovak == true [
+  //       #h(.3em)_Kľúčové slová_---#h(weak: true, 0pt)#index-terms.join(", ")
+  //     ] else if index-terms-name-slovak == false [
+  //       #h(.3em)_Index Terms_---#h(weak: true, 0pt)#index-terms.join(", ")
+  //     ] else [
+  //       #h(.3em)#emph[#index-terms-name-slovak]---#h(weak: true, 0pt)#index-terms.join(", ")
+  //     ]
+  //   ]
+  //   #v(2pt)
+  // ]
 
   // CHANGE:
     show link: it => {
@@ -323,6 +340,29 @@
     }
   }
 
+
+  // Outline / Table of contents setup
+
+  show outline.entry.where(level: 1): it => {
+    v(12pt, weak: true)
+    strong(it)
+  }
+
+  outline(indent: auto)
+
+  // List of abbreviations
+  [
+    #set heading(numbering: none)
+    = List of abbreviations
+  ]
+
+  // List of figures
+  outline(title: [List of Figures], target: figure.where(kind: image),)
+
+  // List of tables
+  outline(title: [List of Tables], target: figure.where(kind: table),)
+  
+  
   // Display the paper's contents.
   set par(leading: 0.5em)
   body
