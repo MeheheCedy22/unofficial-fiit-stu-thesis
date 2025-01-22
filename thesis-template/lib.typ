@@ -1,11 +1,21 @@
-#let university = "Slovak University of Technology in Bratislava"
-#let faculty = "Faculty of Informatics and Information Technologies"
-#let thesis-type-name = (
+#let universityEN = "Slovak University of Technology in Bratislava"
+#let facultyEN = "Faculty of Informatics and Information Technologies"
+#let thesis-type-nameEN = (
   bp1: "Progress report on solution BP1",
   bp2: "Bachelor's thesis",
   dp1: "Progress report on solution DP1",
   dp2: "Progress report on solution DP2",
   dp3: "Master's thesis",
+)
+
+#let universitySK = "Slovenská technická univerzita v Bratislave"
+#let facultySK = "Fakulta informatiky a informačných technológií"
+#let thesis-type-nameSK = (
+  bp1: "Priebežná správa o riešení BP1",
+  bp2: "Bakalárska práca",
+  dp1: "Priebežná správa o riešení DP1",
+  dp2: "Priebežná správa o riešení DP2",
+  dp3: "Diplomová práca",
 )
 
 #import "@preview/wordometer:0.1.4": word-count, total-words
@@ -32,6 +42,7 @@
   thesis-type: "bp1", // bp1, bp2, dp1, dp2, dp3, etc.
   date: [],
   abstract: [],
+  acknowledgement: [Write your acknowledgement. #underline("Do not forget") to mention your thesis supervisor. #lorem(30)],
   index-terms: (),
   paper-size: "a4",
   bibliography: none,
@@ -58,6 +69,9 @@
   // TODO: mozno odstranit
   set block(inset: 5%)
 
+  // line spacing (default 0.65em) src: https://github.com/typst/typst/issues/106#issuecomment-1497030336
+  set par(leading: 1.5em)
+
   show link: it => {
     if underline-links {
       underline[#it]
@@ -70,26 +84,21 @@
   [
     #set align(center)
     #set text(15pt)
-    #university
-    #v(1pt)
-    #faculty
-    #v(4pt)
+    #universityEN \
+    #facultyEN \
     #set text(10pt)
     #evidence-number
     #v(30%)
     #set text(15pt)
-    *#author*
-    #v(1pt)
+    *#author* \
     #set text(20pt)
-    *#title*
+    *#title* \
     #set text(12pt)
-    #v(1pt)
-    #thesis-type-name.at(thesis-type)
+    #thesis-type-nameEN.at(thesis-type)
     #v(30%)
     #set align(left)
     #h(30pt)
-    Thesis supervisor: #thesis-supervisor-name
-    #v(1pt)
+    Thesis supervisor: #thesis-supervisor-name \
     #h(30pt)
     #date
 
@@ -105,31 +114,23 @@
   block(inset: (left: 5%))[
     #set align(center)
     #set text(15pt)
-    #university
-    #v(1pt)
-    #faculty
-    #v(4pt)
+    #universityEN \
+    #facultyEN \
     #set text(10pt)
     #evidence-number
     #v(30%)
     #set text(15pt)
-    *#author*
-    #v(1pt)
+    *#author* \
     #set text(20pt)
-    *#title*
+    *#title* \
     #set text(12pt)
-    #v(1pt)
-    #thesis-type-name.at(thesis-type)
+    #thesis-type-nameEN.at(thesis-type)
     #v(15%)
     #set align(left)
-    Study program: Informatics
-    #v(1pt)
-    Study field: 9.2.1 Computer Science
-    #v(1pt)
-    Training workplace: Institute of Computer Engineering and Applied Informatics, FIIT STU, Bratislava
-    #v(1pt)
-    Thesis supervisor: #thesis-supervisor-name
-    #v(1pt)
+    Study program: Informatics \
+    Study field: 9.2.1 Computer Science \
+    Training workplace: Institute of Computer Engineering and Applied Informatics, FIIT STU, Bratislava \
+    Thesis supervisor: #thesis-supervisor-name \
     #date
 
   ]
@@ -158,10 +159,62 @@
 
   // acknowledgement
   block[
-    = Acknowledgement
-    #lorem(100)
+    #set text(size: 17pt)
+    *Acknowledgement* \
+    #v(10pt)
+    #set text(size: 12pt)
+    #set par(leading: 1.5em)
+    #acknowledgement
   ]
+  pagebreak()
+  pagebreak()
+
+  // TODO: temporary solution without using the lang.toml file and linguify package
+  // annotation SLOVAK
+    block[
+    #set text(size: 17pt)
+    *Anotácia* \
+    #v(10pt)
+    #set text(size: 12pt)
+    #set par(leading: 1.5em)
+    #universitySK \
+    #upper[#facultySK] \
+
+    #grid(columns: 2)[
+      Študijný program: #h(45pt) Informatika
+      #v(3em)
+      Autor: #h(103pt) #author \
+      #if thesis-type.find("bp") == "bp" [
+        #thesis-type-nameSK.at("bp2"):
+      ] else if thesis-type.find("dp") == "dp" [
+        #thesis-type-nameSK.at("dp3"):
+      ] #h(46pt) #title #lorem(10) \
+      Vedúci
+      #if thesis-type.find("bp") == "bp" [
+        bakalárskej
+      ] else if thesis-type.find("dp") == "dp" [
+        diplomovej
+      ] práce: #h(10pt) #thesis-supervisor-name
+    ]
+  ]
+  pagebreak()
+  pagebreak()
+   
   
+  // annotation ENGLISH
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   // TODO: move this to be on correct spot
   // reset numbering and start counting
@@ -170,12 +223,11 @@
 
   // TODO: use this code somewhere
   // if thesis-type.find("bp") == "bp" [
-  //   #thesis-type-name.at("bp2")
+  //   #thesis-type-nameEN.at("bp2")
   // ] else if thesis-type.find("dp") == "dp" [
-  //   #thesis-type-name.at("dp3")
+  //   #thesis-type-nameEN.at("dp3")
   // ]
 
-  // Set document metadata.
 
   // Set the body font.
   // TODO: check and correct this
