@@ -2,10 +2,10 @@
 #let facultyEN = "Faculty of Informatics and Information Technologies"
 #let thesis-type-nameEN = (
   bp1: "Progress report on solution BP1",
-  bp2: "Bachelor's thesis",
+  bp2: "Bachelor's Thesis",
   dp1: "Progress report on solution DP1",
   dp2: "Progress report on solution DP2",
-  dp3: "Master's thesis",
+  dp3: "Master's Thesis",
 )
 
 #let universitySK = "Slovenská technická univerzita v Bratislave"
@@ -35,13 +35,20 @@
 // for counting words
 #show: word-count
 
+
+// TODO: add parameter for 2nd consultant or supervisor (Departmental advisor / Consultant)
+// SK: Pedagogický vedúci - Konzultant
+
 #let thesis(
   title: [The title of the thesis],
   author: "Placeholder for name", // "name surname" with titles in double quotes
   thesis-supervisor-name: "Placeholder for name",
   thesis-type: "bp1", // bp1, bp2, dp1, dp2, dp3, etc.
-  date: [],
+  dateEN: [],
+  dateSK: [],
   abstract: [],
+  annotationEN: [],
+  annotationSK: [],
   acknowledgement: [Write your acknowledgement. #underline("Do not forget") to mention your thesis supervisor. #lorem(30)],
   index-terms: (),
   paper-size: "a4",
@@ -66,8 +73,6 @@
   set document(title: title, author: author)
   set page(paper: "a4") // TODO: fix numbering for different parts
   set text(12pt)
-  // TODO: mozno odstranit
-  set block(inset: 5%)
 
   // line spacing (default 0.65em) src: https://github.com/typst/typst/issues/106#issuecomment-1497030336
   set par(leading: 1.5em)
@@ -100,10 +105,9 @@
     #h(30pt)
     Thesis supervisor: #thesis-supervisor-name \
     #h(30pt)
-    #date
-
-    #pagebreak()
+    #dateEN
   ]
+  pagebreak()
   pagebreak()
 
   // TODO: add study program and field based on user params or something
@@ -111,7 +115,7 @@
   // and also fix margings of the page because it wil fail brutaly when other data inputed
 
   // title page
-  block(inset: (left: 5%))[
+  [
     #set align(center)
     #set text(15pt)
     #universityEN \
@@ -131,7 +135,7 @@
     Study field: 9.2.1 Computer Science \
     Training workplace: Institute of Computer Engineering and Applied Informatics, FIIT STU, Bratislava \
     Thesis supervisor: #thesis-supervisor-name \
-    #date
+    #dateEN
 
   ]
   pagebreak()
@@ -145,11 +149,11 @@
   pagebreak()
 
   // honest declaration
-  block(inset: (left: 5%))[
+  block[
     #v(75%)
     I honestly declare that I prepared this thesis independently, on the basis of consultations and using the cited literature.
     #v(3em)
-    In Bratislava, #date
+    In Bratislava, #dateEN
     #set align(right)
     #v(3em)
     #author
@@ -171,46 +175,83 @@
 
   // TODO: temporary solution without using the lang.toml file and linguify package
   // annotation SLOVAK
-    block[
+
+  block[
     #set text(size: 17pt)
     *Anotácia* \
     #v(10pt)
     #set text(size: 12pt)
-    #set par(leading: 1.5em)
+    #set par(leading: 1.4em)
     #universitySK \
     #upper[#facultySK] \
-
-    #grid(columns: 2)[
-      Študijný program: #h(45pt) Informatika
-      #v(3em)
-      Autor: #h(103pt) #author \
-      #if thesis-type.find("bp") == "bp" [
+  
+    #table(
+      // setup
+      inset: (left: 0pt, right: 3em),
+      align: left,
+      stroke: none,
+      columns: 2,
+      // content
+      [Študijný program:],[Informatika], 
+      [Autor:], [#author],
+      [#if thesis-type.find("bp") == "bp" [
         #thesis-type-nameSK.at("bp2"):
       ] else if thesis-type.find("dp") == "dp" [
         #thesis-type-nameSK.at("dp3"):
-      ] #h(46pt) #title #lorem(10) \
-      Vedúci
-      #if thesis-type.find("bp") == "bp" [
+      ]], [#title #lorem(10)],
+      [Vedúci #if thesis-type.find("bp") == "bp" [
         bakalárskej
       ] else if thesis-type.find("dp") == "dp" [
-        diplomovej
-      ] práce: #h(10pt) #thesis-supervisor-name
-    ]
+        diplomovej] práce:], [#thesis-supervisor-name],
+    )
+  
+    #set text(size: 12pt)
+    #set par(leading: 1.4em)
+    #dateSK
+    #v(1em)
+    #annotationSK
   ]
   pagebreak()
   pagebreak()
-   
   
   // annotation ENGLISH
+  block[
+    #set text(size: 17pt)
+    *Annotation* \
+    #v(10pt)
+    #set text(size: 12pt)
+    #set par(leading: 1.4em)
+    #universityEN \
+    #upper[#facultyEN] \
+  
+    #table(
+      // setup
+      inset: (left: 0pt, right: 3em),
+      align: left,
+      stroke: none,
+      columns: 2,
+      // content
+      [Degree course:],[Informatics], 
+      [Author:], [#author],
+      [#if thesis-type.find("bp") == "bp" [
+        #thesis-type-nameEN.at("bp2"):
+      ] else if thesis-type.find("dp") == "dp" [
+        #thesis-type-nameEN.at("dp3"):
+      ]], [#title #lorem(10)],
+      [Supervisor:], [#thesis-supervisor-name],
+    )
+  
+    #set text(size: 12pt)
+    #set par(leading: 1.4em)
+    #dateEN
+    #v(1em)
+    #annotationEN
+  ]
+  pagebreak()
+  pagebreak()
 
-
-
-
-
-
-
-
-
+  // TODO: setup some things as text size heading etc.
+  // table of contents
 
 
 
