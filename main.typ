@@ -28,10 +28,77 @@
   paper-size: "a4",
   thesis_lang: "en", // For Slovak use "sk"
   evidence-number: "FIIT-XXXX-XXXXX",
+
+  list-of-abbrev: [
+    = List of abbreviations
+  
+      #table(
+        // setup
+        stroke: none,
+        align: left,
+        columns: 2,
+        inset: (left: 0pt, right: 1em),
+        row-gutter: 0.5em,
+        // content
+        [*AI*], [Artificial Intelligence],
+        [*ML*], [Machine Learning],
+        [*DL*], [Deep Learning],
+        [*LLM*], [Large Language Model],
+        [*NLP*], [Natural Language Processing],
+        [*GPT*], [Generative Pre-Trained Transformer],
+        [*ANN*], [Artificial Neural Network],
+        [*NN*], [Neural Network],
+        [*EU*], [European Union],
+        [*ANI*], [Artificial Narrow Intelligence],
+        [*AGI*], [Artificial General Intelligence],
+        [*ASI*], [Artificial Super Intelligence],
+      )
+  ],
+
+  // appendices needs to be written here to not break other things
+  appendices: [
+    = Appendix A
+    == Work Schedule in Winter Semester
+    #figure(
+      table(
+        columns: 2,
+        [*Semester week number *], [*Info*],
+        [1],[#lorem(8)],
+        [2],[#lorem(8)],
+        [3],[#lorem(8)],
+        [4],[#lorem(8)],
+        [5],[#lorem(8)],
+        [6],[#lorem(8)],
+        [7],[#lorem(8)],
+        [8],[#lorem(8)],
+        [9],[#lorem(8)],
+        [10],[#lorem(8)],
+        [12],[#lorem(8)],
+        [12],[#lorem(8)],
+      ),
+    )
+
+    // TODO: fix 2nd and deeper heading to not show or show properly in Table of Contents
+    // need to manually write this for now, because numbering is off globally for appendix and it will break other things
+    === A.1 Plan Evaluation
+    #lorem(100)
+
+    = Appendix B
+
+    == Survey questions
+
+    #lorem(50)
+
+    #figure(
+      image("assets/Test.svg")
+    )
+
+  ]
 )
 // need to reset the counter here, it does not work in the lib.typ from my little testing
 #counter(page).update(1)
 
+// =============== HERE YOU CAN START WRITING YOUR THESIS ===============
 
 = Introduction
 #lorem(100)
@@ -154,6 +221,4 @@ This is a test cite @vaswani2023attentionneed.
 // this code needs to be here to now show resume in table of contents (ToC) and also it makes writing resume much easier
 #set heading(numbering: none, outlined: false)
 = Resumé
-
-// TODO:
-// Appendices (need to figure out also in template)
+#lorem(100)

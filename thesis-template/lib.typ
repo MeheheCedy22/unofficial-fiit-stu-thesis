@@ -64,6 +64,9 @@
   table-supplement: [Tabuľka],
   section-supplement: [Sekcia],
 
+  appendices: [],
+  list-of-abbrev: [],
+
   body
 ) = {
 
@@ -336,7 +339,6 @@
     #annotationEN
   ]
   pagebreak()
-  pagebreak()
 
   // table of contents
   set page(numbering: "I")
@@ -354,8 +356,7 @@
   // list of abbreviations
   [
     #set heading(numbering: none, outlined: false)
-    = List of abbreviations
-    // TODO: add table for abbrev
+    #list-of-abbrev
   ]
   pagebreak()
 
@@ -372,24 +373,16 @@
   set par(spacing: 0.45em, justify: true, first-line-indent: 1em, leading: 0.5em)
   set page(numbering: "1")
   body
-  // pagebreak()
 
+  // TODO: fix bibliography to show in Table of Contents without numbering
   // display bibliography
   set heading(numbering: none, outlined: false)
   bibliography
 
-  pagebreak()
-
-  // TODO: make this section to work
   // appendices
-  set heading(numbering: none, outlined: true)
   [
-    = Appendix
-
+    #set heading(numbering: none, outlined: true)
+    #set figure(outlined: false)
+    #appendices
   ]
-
-
-
-
-
 }
