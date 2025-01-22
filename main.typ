@@ -3,6 +3,10 @@
 #show: thesis.with(
   title: [This is Title of Thesis], 
   author: "Janko Mrkvicka",
+  thesis-supervisor-name: "Ing. Giovanni Petr, PhD.",
+  date: [January 2025],
+
+  assignment: "../assets/Test.svg",
 
   // full: true -> show all references without citing
   // TODO: remove the full: true
