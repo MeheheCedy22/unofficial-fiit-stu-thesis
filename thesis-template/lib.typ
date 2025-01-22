@@ -370,7 +370,7 @@
   // pagebreak()
   
   // paragraph setting for the body of the thesis
-  set par(spacing: 0.45em, justify: true, first-line-indent: 1em, leading: 0.5em)
+  set par(spacing: 3em, justify: true, leading: 1em)
   set page(numbering: "1")
   body
 
