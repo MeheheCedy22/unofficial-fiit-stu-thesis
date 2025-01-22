@@ -2,7 +2,7 @@
 default-lang = "sk"
 
 [sk]
-abstract = "Abstrakt"
+annotation = "Anotácia"
 university = "Slovenská technická univerzita v Bratislave"
 faculty = "Fakulta informatiky a informačných technológií"
 bachelor-thesis = "Bakalárska práca"
@@ -15,7 +15,7 @@ workplace = "Miesto vypracovania"
 
 
 [en]
-abstract = "Abstract"
+annotation = "Annotation"
 university = "Slovak University of Technology in Bratislava"
 faculty = "Faculty of Informatics and Information Technologies"
 bachelor-thesis = "Bachelor's thesis"
