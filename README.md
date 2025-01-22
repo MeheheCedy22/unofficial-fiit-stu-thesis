@@ -22,9 +22,11 @@ If you do not have or do not want to use Typst locally, you can use the [Typst W
 
 ## Usage
 
-Most, if not all of the parameters that you need to set are in the `main.typ` file and are pretty self-explanatory. You can also check the [lib.typ](lib.typ) file for more information on the document setup.
+Most, if not all of the parameters that you need to set are in the `main.typ` file and are pretty self-explanatory. You can also check the [lib.typ](./thesis-template/lib.typ) file for more information on the document setup.
 
 You can change anything anywhere, but be careful with the `lib.typ` file. Even some minor changes can break the whole document if you do not know what you are doing.
+
+Example of rendered document can be found in the [main.pdf](main.pdf) file.
 
 ## First time users to Typst
 
