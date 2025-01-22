@@ -350,7 +350,7 @@
 
   outline(indent: auto)
 
-  pagebreak()
+  pagebreak(weak: true)
 
 
   // list of abbreviations
@@ -367,7 +367,7 @@
   // list of tables
   outline(title: [List of Tables], target: figure.where(kind: table),)
   // pagebreak not needed because i already break before level 1 heading
-  // pagebreak()
+  pagebreak()
   
   // paragraph setting for the body of the thesis
   set par(spacing: 3em, justify: true, leading: 1em)

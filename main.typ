@@ -94,6 +94,7 @@
   ]
 )
 // need to reset the counter here, it does not work in the lib.typ from my little testing
+// TODO: fix the counter to now show numbering on blank pages before ToC (Table of Contents) and Introduction
 #counter(page).update(1)
 
 // =============== HERE YOU CAN START WRITING YOUR THESIS ===============
