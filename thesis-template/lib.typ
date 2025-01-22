@@ -58,12 +58,11 @@
   // TODO: fix assignmetn image, dont know if it must be .png .jpg or that typst can input .pdf
   assignment: none,
 
-  // TODO: fix these
-
+  bib-style: "ieee",
   bib-name: [Literatúra],
-  figure-reference-supplement: [Obr.],
-  table-reference-supplement: [Tabuľka],
-  section-reference-supplement: [Sekcia],
+  figure-supplement: [Obrázok],
+  table-supplement: [Tabuľka],
+  section-supplement: [Sekcia],
 
   body
 ) = {
@@ -84,18 +83,91 @@
 // =========================
   // document global settings
   set document(title: title, author: author)
-  set page(paper: "a4") // TODO: fix numbering for different parts
+  set page(paper: "a4")
   set text(font: "STIX Two Text", size: 12pt, spacing: 0.35em)
   set list(indent: 10pt, body-indent: 9pt, marker: ([•], [–], [∗]))
-  set std.bibliography(title: text(10pt)[#bib-name], style: "iso-690-author-date")
+  set std.bibliography(title: text(23pt)[#bib-name], style: bib-style)
   // line spacing (default 0.65em) src: https://github.com/typst/typst/issues/106#issuecomment-1497030336
   set par(leading: 1.5em)
-  set heading(numbering: "1.1.1.", supplement: section-reference-supplement)
+  set heading(numbering: "1.1.1.", supplement: section-supplement)
 
   // underline all links based on user choice
   show link: it => {
     if underline-links {
       underline[#it]
+    } else {
+      it
+    }
+  }
+
+  // tables & figures setup
+  show figure: set block(spacing: 15.5pt)
+  show figure: set place(clearance: 15.5pt)
+
+  show figure.where(kind: table): set figure.caption(position: top)
+  show figure.where(kind: table): set text(size: 10pt)
+
+  show figure.where(kind: table): set figure(supplement: table-supplement, numbering: "1")
+  show figure.where(kind: image): set figure(supplement: figure-supplement, numbering: "1")
+
+  show figure.caption: set text(size: 10pt)
+  show figure.caption: set align(start)
+
+  show figure.caption.where(kind: table): set align(center)
+  show figure.caption.where(kind: image): set align(center)
+  
+  // supplement for references and for captions are the same !
+  show figure: fig => {
+    let prefix = (
+      if fig.kind == table [#table-supplement]
+      else if fig.kind == image [#figure-supplement]
+      else [#fig.supplement]
+    )
+    let numbers = numbering(fig.numbering, ..fig.counter.at(fig.location()))
+    show figure.caption: it => [#prefix~#numbers: #it.body]
+    fig
+  }
+
+  // references setup
+  // Configure appearance of equation references
+  show ref: it => {
+    if it.element != none and it.element.func() == math.equation {
+      // Override equation references.
+      link(it.element.location(), numbering(
+        it.element.numbering,
+        ..counter(math.equation).at(it.element.location())
+      ))
+    } else {
+      // Other references as usual.
+      it
+    }
+  }
+
+  // heading setup
+  show heading: it => {
+    // Find out the final number of the heading counter.
+    let levels = counter(heading).get()
+    let deepest = if levels != () {
+      levels.last()
+    } else {
+      1
+    }
+
+    if it.level == 1 {
+      pagebreak()
+      set text(size: 23pt)
+      show: block.with(above: 15pt, below: 2em, sticky: true)
+      if it.numbering != none {
+        numbering("1", deepest)
+        h(7pt, weak: true)
+      }
+      it.body
+    } else if it.level == 2 {
+      set text(size: 16pt)
+      it
+    } else if it.level == 3 {
+      set text(size: 14pt)
+      it
     } else {
       it
     }
@@ -169,7 +241,9 @@
     #v(3em)
     In Bratislava, #dateEN
     #set align(right)
-    #v(3em)
+    #v(2em)
+    ...........................
+    #v(1em)
     #author
   ]
   pagebreak()
@@ -264,7 +338,6 @@
   pagebreak()
   pagebreak()
 
-  // TODO: setup some things as text size heading etc.
   // table of contents
   set page(numbering: "I")
 
@@ -292,21 +365,28 @@
 
   // list of tables
   outline(title: [List of Tables], target: figure.where(kind: table),)
-  pagebreak()
+  // pagebreak not needed because i already break before level 1 heading
+  // pagebreak()
   
   // paragraph setting for the body of the thesis
   set par(spacing: 0.45em, justify: true, first-line-indent: 1em, leading: 0.5em)
   set page(numbering: "1")
   body
+  // pagebreak()
 
-  // TODO: fix Bibliography heading
-  // display bibliography.
+  // display bibliography
   set heading(numbering: none, outlined: false)
   bibliography
 
-  // appendices
-  set heading(numbering: "1", outlined: true)
+  pagebreak()
 
+  // TODO: make this section to work
+  // appendices
+  set heading(numbering: none, outlined: true)
+  [
+    = Appendix
+
+  ]
 
 
 
