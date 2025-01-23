@@ -167,9 +167,11 @@
       it.body
     } else if it.level == 2 {
       set text(size: 16pt)
+      show: block.with(above: 30pt, below: 1.75em, sticky: true)
       it
     } else if it.level == 3 {
       set text(size: 14pt)
+      show: block.with(above: 30pt, below: 1.5em, sticky: true)
       it
     } else {
       it
