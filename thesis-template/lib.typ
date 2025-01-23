@@ -1,21 +1,26 @@
-#let universityEN = "Slovak University of Technology in Bratislava"
-#let facultyEN = "Faculty of Informatics and Information Technologies"
-#let thesis-type-nameEN = (
-  bp1: "Progress report on solution BP1",
-  bp2: "Bachelor's Thesis",
-  dp1: "Progress report on solution DP1",
-  dp2: "Progress report on solution DP2",
-  dp3: "Master's Thesis",
+#let university = (
+  en: "Slovak University of Technology in Bratislava",
+  sk: "Slovenská technická univerzita v Bratislave"
 )
-
-#let universitySK = "Slovenská technická univerzita v Bratislave"
-#let facultySK = "Fakulta informatiky a informačných technológií"
-#let thesis-type-nameSK = (
-  bp1: "Priebežná správa o riešení BP1",
-  bp2: "Bakalárska práca",
-  dp1: "Priebežná správa o riešení DP1",
-  dp2: "Priebežná správa o riešení DP2",
-  dp3: "Diplomová práca",
+#let faculty = (
+  en: "Faculty of Informatics and Information Technologies",
+  sk: "Fakulta informatiky a informačných technológií"
+)
+#let thesis-type-name = (
+  bp1: (
+    en: "Progress report on solution BP1",
+    sk: "Priebežná správa o riešení BP1"
+  ),
+  bp2: (en: "Bachelor's Thesis", sk: "Bakalárska práca"),
+  dp1: (
+    en: "Progress report on solution DP1",
+    sk: "Priebežná správa o riešení DP1"
+  ),
+  dp2: (
+    en: "Progress report on solution DP2",
+    sk: "Priebežná správa o riešení DP2"
+  ),
+  dp3: (en: "Master's Thesis", sk: "Diplomová práca")
 )
 
 #import "@preview/wordometer:0.1.4": word-count, total-words
@@ -69,6 +74,9 @@
 
   body
 ) = {
+    let lang(v) = {
+      return v.at(thesis_lang)
+    }
 
 // =========================
   // TODO: move this to be on correct spot
@@ -183,8 +191,8 @@
   [
     #set align(center)
     #set text(15pt)
-    #universityEN \
-    #facultyEN \
+    #lang(university)
+    #lang(faculty)
     #set text(10pt)
     #evidence-number \
     #v(30%)
@@ -193,7 +201,7 @@
     #set text(20pt)
     *#title* \
     #set text(12pt)
-    #thesis-type-nameEN.at(thesis-type)
+    #lang(thesis-type-name.at(thesis-type))
     #v(30%)
     #set align(left)
     Thesis supervisor: #thesis-supervisor-name \
@@ -210,8 +218,8 @@
   [
     #set align(center)
     #set text(15pt)
-    #universityEN \
-    #facultyEN \
+    #lang(university) \
+    #lang(faculty) \
     #set text(10pt)
     #evidence-number \
     #v(30%)
@@ -220,13 +228,13 @@
     #set text(20pt)
     *#title* \
     #set text(12pt)
-    #thesis-type-nameEN.at(thesis-type)
+    #lang(thesis-type-name.at(thesis-type))
     #v(15%)
     #set align(left)
     Study program: Informatics \
     Study field: 9.2.1 Computer Science \
     Training workplace: Institute of Computer Engineering and Applied Informatics, FIIT STU, Bratislava \
-    Thesis supervisor: #thesis-supervisor-name \
+    Thesis Supervisor: #thesis-supervisor-name \
     #dateEN \
   ]
   pagebreak()
@@ -275,9 +283,9 @@
     #v(10pt)
     #set text(size: 12pt)
     #set par(leading: 1.4em)
-    #universitySK \
-    #upper[#facultySK] \
-  
+    #university.at("sk") \
+    #upper[#faculty.at("sk")] \
+
     #table(
       // setup
       inset: (left: 0pt, right: 3em),
@@ -288,9 +296,9 @@
       [Študijný program:],[Informatika], 
       [Autor:], [#author],
       [#if thesis-type.find("bp") == "bp" [
-        #thesis-type-nameSK.at("bp2"):
+        #thesis-type-name.at("bp2").at("sk"):
       ] else if thesis-type.find("dp") == "dp" [
-        #thesis-type-nameSK.at("dp3"):
+        #thesis-type-name.at("dp3").at("sk"):
       ]], [#title #lorem(10)],
       [Vedúci #if thesis-type.find("bp") == "bp" [
         bakalárskej
@@ -314,8 +322,8 @@
     #v(10pt)
     #set text(size: 12pt)
     #set par(leading: 1.4em)
-    #universityEN \
-    #upper[#facultyEN] \
+    #university.at("en") \
+    #upper[#faculty.at("sk")] \
   
     #table(
       // setup
@@ -327,9 +335,9 @@
       [Degree course:],[Informatics], 
       [Author:], [#author],
       [#if thesis-type.find("bp") == "bp" [
-        #thesis-type-nameEN.at("bp2"):
+        #thesis-type-name.at("bp2").at("en"):
       ] else if thesis-type.find("dp") == "dp" [
-        #thesis-type-nameEN.at("dp3"):
+        #thesis-type-name.at("dp3").at("en"):
       ]], [#title #lorem(10)],
       [Supervisor:], [#thesis-supervisor-name],
     )
