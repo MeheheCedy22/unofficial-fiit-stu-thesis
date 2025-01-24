@@ -43,11 +43,12 @@
   workplace: "Institute of Computer Engineering and Applied Informatics, FIIT STU, Bratislava",
   thesis-supervisor-name: "Placeholder for name",
   thesis-type: "bp1", // bp1, bp2, dp1, dp2, dp3, etc.
-  dateEN: [],
-  dateSK: [],
-  annotationEN: [],
-  annotationSK: [],
-  acknowledgement: [Write your acknowledgement. #underline("Do not forget") to mention your thesis supervisor. #lorem(30)],
+  date: (en: "", sk: ""),
+  annotations: (en: "", sk: ""),
+  acknowledgement: [
+    Write your acknowledgement. #underline("Do not forget") to mention your
+    thesis supervisor. #lorem(30)
+  ],
   index-terms: (),
   paper-size: "a4",
   bibliography: none,
@@ -58,13 +59,13 @@
   assignment: none,
 
   bib-style: "ieee",
-  bib-name: [Literatúra],
-  figure-supplement: [Obrázok],
-  table-supplement: [Tabuľka],
-  section-supplement: [Sekcia],
+  bib-name: "Literatúra",
+  figure-supplement: "Obrázok",
+  table-supplement: "Tabuľka",
+  section-supplement: "Sekcia",
 
-  appendices: [],
-  list-of-abbrev: [],
+  appendices: "",
+  list-of-abbrev: "",
 
   body
 ) = {
@@ -199,7 +200,7 @@
     #v(30%)
     #set align(left)
     #lang((en: "Supervisor", sk: "Vedúci práce")): #thesis-supervisor-name \
-    #dateEN \
+    #lang(date) \
   ]
   pagebreak()
   pagebreak()
@@ -229,7 +230,7 @@
     #lang((en: "Study field", sk: "Študijný odbor")): #studyField \
     #lang((en: "Training workplace", sk: "Miesto vypracovania")): #workplace \
     Thesis Supervisor: #thesis-supervisor-name \
-    #lang((en: dateEN, sk: dateSK)) \
+    #lang(date) \
   ]
   pagebreak()
   pagebreak()
@@ -255,7 +256,7 @@
         ]
     ))
     #v(3em)
-    #lang((en: [In Bratislava, #dateEN], sk: [V Bratislave, #dateSK]))
+    #lang((en: "In Bratislava", sk: "V Bratislave")), #lang(date)
     #set align(right)
     #v(2em)
     ...........................
@@ -311,9 +312,9 @@
 
     #set text(size: 12pt)
     #set par(leading: 1.4em)
-    #dateSK
+    #date.at("sk")
     #v(1em)
-    #annotationSK
+    #annotations.at("sk")
   ]
   pagebreak()
   pagebreak()
@@ -347,9 +348,9 @@
 
     #set text(size: 12pt)
     #set par(leading: 1.4em)
-    #dateEN
+    #date.at("en")
     #v(1em)
-    #annotationEN
+    #annotations.at("en")
   ]
   pagebreak()
 
