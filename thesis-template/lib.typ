@@ -278,17 +278,14 @@
   pagebreak()
   pagebreak()
 
-  // TODO: temporary solution without using the lang.toml file and linguify package
-  // annotation SLOVAK
-
-  block[
+  let annotate(lang) = block[
     #set text(size: 17pt)
-    *Anotácia* \
+    *#(en: "Annotation", sk: "Anotácia").at(lang)* \
     #v(10pt)
     #set text(size: 12pt)
     #set par(leading: 1.4em)
-    #university.at("sk") \
-    #upper[#faculty.at("sk")] \
+    #university.at(lang) \
+    #upper[#faculty.at(lang)] \
 
     #table(
       // setup
@@ -297,61 +294,39 @@
       stroke: none,
       columns: 2,
       // content
-      "Študijný program:", studyProgram.at("sk"),
-      "Autor:", author,
-      [#if thesis-type.find("bp") == "bp" [
-        #thesis-type-name.at("bp2").at("sk"):
+      (
+        en: "Degree course:", sk: "Studijný program:"
+      ).at(lang), studyProgram.at(lang),
+      (en: "Author:", sk: "Autor:").at(lang), author,
+      if thesis-type.find("bp") == "bp" [
+        #thesis-type-name.at("bp2").at(lang):
       ] else if thesis-type.find("dp") == "dp" [
-        #thesis-type-name.at("dp3").at("sk"):
-      ]], [#title #lorem(10)],
-      [Vedúci #if thesis-type.find("bp") == "bp" [
-        bakalárskej
-      ] else if thesis-type.find("dp") == "dp" [
-        diplomovej] práce:], [#thesis-supervisor-name],
+        #thesis-type-name.at("dp3").at(lang):
+      ], title,
+     (
+        en: "Supervisor:",
+        sk: [
+          Vedúci #if thesis-type.find("bp") == "bp" [
+            bakalárskej
+          ] else if thesis-type.find("dp") == "dp" [
+            diplomovej
+          ] práce:
+        ]
+      ).at(lang), [#thesis-supervisor-name],
     )
 
     #set text(size: 12pt)
     #set par(leading: 1.4em)
-    #date.at("sk")
+    #date.at(lang)
     #v(1em)
-    #annotations.at("sk")
+    #annotations.at(lang)
   ]
+
+  annotate("sk")
   pagebreak()
   pagebreak()
 
-  // annotation ENGLISH
-  block[
-    #set text(size: 17pt)
-    *Annotation* \
-    #v(10pt)
-    #set text(size: 12pt)
-    #set par(leading: 1.4em)
-    #university.at("en") \
-    #upper[#faculty.at("sk")] \
-
-    #table(
-      // setup
-      inset: (left: 0pt, right: 3em),
-      align: left,
-      stroke: none,
-      columns: 2,
-      // content
-      "Degree course:", studyProgram.at("en"),
-      "Author:", author,
-      [#if thesis-type.find("bp") == "bp" [
-        #thesis-type-name.at("bp2").at("en"):
-      ] else if thesis-type.find("dp") == "dp" [
-        #thesis-type-name.at("dp3").at("en"):
-      ]], [#title #lorem(10)],
-      "Supervisor:", [#thesis-supervisor-name],
-    )
-
-    #set text(size: 12pt)
-    #set par(leading: 1.4em)
-    #date.at("en")
-    #v(1em)
-    #annotations.at("en")
-  ]
+  annotate("en")
   pagebreak()
 
   // table of contents
@@ -382,7 +357,7 @@
   outline(title: [List of Tables], target: figure.where(kind: table),)
   // pagebreak not needed because i already break before level 1 heading
   pagebreak()
-  
+
   // paragraph setting for the body of the thesis
   set par(spacing: 3em, justify: true, leading: 1em)
   set page(numbering: "1")
