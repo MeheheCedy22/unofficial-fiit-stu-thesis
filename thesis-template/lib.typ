@@ -297,7 +297,7 @@
       stroke: none,
       columns: 2,
       // content
-      "Študijný program:", lang(studyProgram),
+      "Študijný program:", studyProgram.at("sk"),
       "Autor:", author,
       [#if thesis-type.find("bp") == "bp" [
         #thesis-type-name.at("bp2").at("sk"):
