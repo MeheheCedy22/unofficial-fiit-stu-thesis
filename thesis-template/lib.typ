@@ -24,22 +24,13 @@
 )
 
 #import "@preview/wordometer:0.1.4": word-count, total-words
-#import "@preview/linguify:0.4.1": *
-
-// TODO: fix this
-// #let lang_data = toml("../lang.toml")
-// #set-database(lang_data);
 
 // TODO: have it pass as argument from thesis object
 // For Slovak use "sk"
 // #set text(lang: "en")
 
-// TODO: linguify all based on lang passed as argument from thesis object
-// #linguify("annotation")  // Shows "Anotácia" in the document.
-
 // for counting words
 #show: word-count
-
 
 // TODO: add parameter for 2nd consultant or supervisor (Departmental advisor / Consultant)
 // SK: Pedagogický vedúci - Konzultant
@@ -47,6 +38,9 @@
 #let thesis(
   title: [The title of the thesis],
   author: "Placeholder for name", // "name surname" with titles in double quotes
+  studyProgram: (en: "Informatics", sk: "Informatika"),
+  studyField: "9.2.1 Computer Science",
+  workplace: "Institute of Computer Engineering and Applied Informatics, FIIT STU, Bratislava",
   thesis-supervisor-name: "Placeholder for name",
   thesis-type: "bp1", // bp1, bp2, dp1, dp2, dp3, etc.
   dateEN: [],
@@ -126,7 +120,7 @@
 
   show figure.caption.where(kind: table): set align(center)
   show figure.caption.where(kind: image): set align(center)
-  
+
   // supplement for references and for captions are the same !
   show figure: fig => {
     let prefix = (
@@ -191,8 +185,8 @@
   [
     #set align(center)
     #set text(15pt)
-    #lang(university)
-    #lang(faculty)
+    #lang(university) \
+    #lang(faculty) \
     #set text(10pt)
     #evidence-number \
     #v(30%)
@@ -204,7 +198,7 @@
     #lang(thesis-type-name.at(thesis-type))
     #v(30%)
     #set align(left)
-    Thesis supervisor: #thesis-supervisor-name \
+    #lang((en: "Supervisor", sk: "Vedúci práce")): #thesis-supervisor-name \
     #dateEN \
   ]
   pagebreak()
@@ -231,11 +225,11 @@
     #lang(thesis-type-name.at(thesis-type))
     #v(15%)
     #set align(left)
-    Study program: Informatics \
-    Study field: 9.2.1 Computer Science \
-    Training workplace: Institute of Computer Engineering and Applied Informatics, FIIT STU, Bratislava \
+    #lang((en: "Study program", sk: "Študijný program")): #lang(studyProgram) \
+    #lang((en: "Study field", sk: "Študijný odbor")): #studyField \
+    #lang((en: "Training workplace", sk: "Miesto vypracovania")): #workplace \
     Thesis Supervisor: #thesis-supervisor-name \
-    #dateEN \
+    #lang((en: dateEN, sk: dateSK)) \
   ]
   pagebreak()
   pagebreak()
@@ -250,9 +244,18 @@
   // honest declaration
   block[
     #v(75%)
-    I honestly declare that I prepared this thesis independently, on the basis of consultations and using the cited literature.
+    #lang((
+        en: [
+            I honestly declare that I prepared this thesis independently, on
+            the basis of consultations and using the cited literature.
+        ],
+        sk: [
+            Čestne vyhlasujem, že som túto prácu vypracoval(a) samostatne, na
+            základe konzultácií a s použitím uvedenej literatúry.
+        ]
+    ))
     #v(3em)
-    In Bratislava, #dateEN
+    #lang((en: [In Bratislava, #dateEN], sk: [V Bratislave, #dateSK]))
     #set align(right)
     #v(2em)
     ...........................
@@ -265,7 +268,7 @@
   // acknowledgement
   block[
     #set text(size: 17pt)
-    *Acknowledgement* \
+    *#lang((en: "Acknowledgement", sk: "Poďakovanie"))* \
     #v(10pt)
     #set text(size: 12pt)
     #set par(leading: 1.5em)
@@ -293,8 +296,8 @@
       stroke: none,
       columns: 2,
       // content
-      [Študijný program:],[Informatika], 
-      [Autor:], [#author],
+      "Študijný program:", lang(studyProgram),
+      "Autor:", author,
       [#if thesis-type.find("bp") == "bp" [
         #thesis-type-name.at("bp2").at("sk"):
       ] else if thesis-type.find("dp") == "dp" [
@@ -305,7 +308,7 @@
       ] else if thesis-type.find("dp") == "dp" [
         diplomovej] práce:], [#thesis-supervisor-name],
     )
-  
+
     #set text(size: 12pt)
     #set par(leading: 1.4em)
     #dateSK
@@ -314,7 +317,7 @@
   ]
   pagebreak()
   pagebreak()
-  
+
   // annotation ENGLISH
   block[
     #set text(size: 17pt)
@@ -324,7 +327,7 @@
     #set par(leading: 1.4em)
     #university.at("en") \
     #upper[#faculty.at("sk")] \
-  
+
     #table(
       // setup
       inset: (left: 0pt, right: 3em),
@@ -332,16 +335,16 @@
       stroke: none,
       columns: 2,
       // content
-      [Degree course:],[Informatics], 
-      [Author:], [#author],
+      "Degree course:", studyProgram.at("en"),
+      "Author:", author,
       [#if thesis-type.find("bp") == "bp" [
         #thesis-type-name.at("bp2").at("en"):
       ] else if thesis-type.find("dp") == "dp" [
         #thesis-type-name.at("dp3").at("en"):
       ]], [#title #lorem(10)],
-      [Supervisor:], [#thesis-supervisor-name],
+      "Supervisor:", [#thesis-supervisor-name],
     )
-  
+
     #set text(size: 12pt)
     #set par(leading: 1.4em)
     #dateEN
