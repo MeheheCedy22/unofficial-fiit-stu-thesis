@@ -1,0 +1,14 @@
+TODOs:
+- [x] add `none`/`false` option for list of figures (not show if none)
+- [x] add `none`/`false` option for list of tables (not show if none)
+- [x] add `none`/`false` option for list of abbreviations (not show if none)
+- [ ] add parameter for 2nd consultant or supervisor (Departmental advisor / Consultant) SK: Pedagogický vedúci - Konzultant
+- [ ] fix pagebreaks to be like in a book, where every chapter starts on odd page
+- [ ] fix numbering to be like in a book (on specific side when page is even/odd)
+- [ ] fix numbering of appendices (first fix appendices in general !!)
+- [ ] assignment image, dont know if it must be .png .jpg or that typst can input .pdf
+- [ ] maybe make honest declaration as user input because of `vypracoval(a)` is gender dependent
+- [ ] make 1st level headings to be bold/strong in Table of Contents but not in List of figures, and list of tables
+- [ ] fix bibliography to show in Table of Contents without numbering
+- [ ] fix 2nd and deeper level headings to not show or show properly in Table of Contents for appendices
+- [ ] fix the counter to now show numbering on blank pages before ToC (Table of Contents) and Introduction
