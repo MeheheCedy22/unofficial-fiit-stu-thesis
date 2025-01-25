@@ -1,3 +1,8 @@
+#import "@preview/wordometer:0.1.4": word-count, total-words
+// for counting words
+#show: word-count
+
+
 #let university = (
   en: "Slovak University of Technology in Bratislava",
   sk: "Slovenská technická univerzita v Bratislave"
@@ -11,7 +16,10 @@
     en: "Progress report on solution BP1",
     sk: "Priebežná správa o riešení BP1"
   ),
-  bp2: (en: "Bachelor's Thesis", sk: "Bakalárska práca"),
+  bp2: (
+    en: "Bachelor's Thesis", 
+    sk: "Bakalárska práca"
+    ),
   dp1: (
     en: "Progress report on solution DP1",
     sk: "Priebežná správa o riešení DP1"
@@ -20,23 +28,21 @@
     en: "Progress report on solution DP2",
     sk: "Priebežná správa o riešení DP2"
   ),
-  dp3: (en: "Master's Thesis", sk: "Diplomová práca")
+  dp3: (
+    en: "Master's Thesis", 
+    sk: "Diplomová práca"
+    )
 )
-
-#import "@preview/wordometer:0.1.4": word-count, total-words
-
-// TODO: have it pass as argument from thesis object
-// For Slovak use "sk"
-// #set text(lang: "en")
-
-// for counting words
-#show: word-count
 
 // TODO: add parameter for 2nd consultant or supervisor (Departmental advisor / Consultant)
 // SK: Pedagogický vedúci - Konzultant
+// 
+// TODO: fix pagebreaks to be like in a book, where every chapter starts on odd page
+// TODO: fix numbering to be like in a book (on specific side when page is even/odd)
+// TODO: fix numbering of appendices (first fix appendices in general)
 
 #let thesis(
-  title: [The title of the thesis],
+  title: (en: "The title of the thesis", sk: "Názov práce"),
   author: "Placeholder for name", // "name surname" with titles in double quotes
   studyProgram: (en: "Informatics", sk: "Informatika"),
   studyField: "9.2.1 Computer Science",
@@ -52,7 +58,7 @@
   index-terms: (),
   paper-size: "a4",
   bibliography: none,
-  thesis_lang: "en", // For Slovak use "sk"
+  thesis-lang: "en", // For Slovak use "sk"
   evidence-number: "FIIT-XXXX-XXXXX",
   underline-links: true,
   // TODO: fix assignmetn image, dont know if it must be .png .jpg or that typst can input .pdf
@@ -70,7 +76,7 @@
   body
 ) = {
     let lang(v) = {
-      return v.at(thesis_lang)
+      return v.at(thesis-lang)
     }
 
 // =========================
@@ -88,7 +94,7 @@
 
 // =========================
   // document global settings
-  set document(title: title, author: author)
+  set document(title: lang(title), author: author)
   set page(paper: "a4")
   set text(font: "STIX Two Text", size: 12pt, spacing: 0.35em)
   set list(indent: 10pt, body-indent: 9pt, marker: ([•], [–], [∗]))
@@ -184,21 +190,22 @@
 
   // cover page
   [
-    #set align(center)
+    #set align(center + top)
     #set text(15pt)
     #lang(university) \
     #lang(faculty) \
     #set text(10pt)
     #evidence-number \
     #v(30%)
+    #set align(center + horizon)
     #set text(15pt)
     *#author* \
     #set text(20pt)
-    *#title* \
+    *#lang(title)* \
     #set text(12pt)
     #lang(thesis-type-name.at(thesis-type))
     #v(30%)
-    #set align(left)
+    #set align(left + bottom)
     #lang((en: "Supervisor", sk: "Vedúci práce")): #thesis-supervisor-name \
     #lang(date) \
   ]
@@ -211,21 +218,22 @@
 
   // title page
   [
-    #set align(center)
+    #set align(center + top)
     #set text(15pt)
     #lang(university) \
     #lang(faculty) \
     #set text(10pt)
     #evidence-number \
     #v(30%)
+    #set align(center + horizon)
     #set text(15pt)
     *#author* \
     #set text(20pt)
-    *#title* \
+    *#lang(title)* \
     #set text(12pt)
     #lang(thesis-type-name.at(thesis-type))
     #v(15%)
-    #set align(left)
+    #set align(left + bottom)
     #lang((en: "Study program", sk: "Študijný program")): #lang(studyProgram) \
     #lang((en: "Study field", sk: "Študijný odbor")): #studyField \
     #lang((en: "Training workplace", sk: "Miesto vypracovania")): #workplace \
@@ -302,7 +310,7 @@
         #thesis-type-name.at("bp2").at(lang):
       ] else if thesis-type.find("dp") == "dp" [
         #thesis-type-name.at("dp3").at(lang):
-      ], title,
+      ], title.at(lang),
      (
         en: "Supervisor:",
         sk: [
@@ -332,12 +340,8 @@
   // table of contents
   set page(numbering: "I")
 
-  show outline.entry.where(level: 1): it => {
-    v(12pt, weak: true)
-    strong(it)
-  }
-
-  outline(indent: auto)
+  // TODO: make 1st level headings to be bol in Table of Contents but not in List of figgurec etc.
+  outline(title: lang((en: "Contents", sk: "Obsah")), indent: auto)
 
   pagebreak(weak: true)
 
@@ -345,16 +349,17 @@
   // list of abbreviations
   [
     #set heading(numbering: none, outlined: false)
+    = #lang((en: "List of abbreviations", sk: "Zoznam použitých skratiek"))
     #list-of-abbrev
   ]
   pagebreak()
 
   // list of figures
-  outline(title: [List of Figures], target: figure.where(kind: image),)
+  outline(title: lang((en: "List of Figures", sk: "Zoznam použitých obrázkov")), target: figure.where(kind: image),)
   pagebreak()
 
   // list of tables
-  outline(title: [List of Tables], target: figure.where(kind: table),)
+  outline(title: lang((en: "List of Tables", sk: "Zoznam použitých tabuliek")), target: figure.where(kind: table),)
   // pagebreak not needed because i already break before level 1 heading
   pagebreak()
 

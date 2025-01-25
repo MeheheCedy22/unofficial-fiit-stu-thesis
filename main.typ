@@ -2,7 +2,7 @@
 
 #show: thesis.with(
   thesis-type: "bp1", // bp1, bp2, dp1, dp2, dp3, etc.
-  title: "Title of the Thesis", 
+  title: (en: "The title of the thesis", sk: "Názov práce"),
   author: "Janko Mrkvicka",
   thesis-supervisor-name: "Ing. Enzo Gorlomi, PhD.",
   // NOTE: the english annotations actually ask for `Year, month`
@@ -37,12 +37,10 @@
     thesis supervisor. #lorem(30)
   ],
   paper-size: "a4",
-  thesis_lang: "en", // For Slovak use "sk"
+  thesis-lang: "en", // For Slovak use "sk"
   evidence-number: "FIIT-XXXX-XXXXX",
 
   list-of-abbrev: [
-    = List of abbreviations
-  
       #table(
         // setup
         stroke: none,
@@ -64,7 +62,7 @@
       )
   ],
 
-  // appendices needs to be written here to not break other things
+  // appendices needs to be written here manually to not break other things (for now)
   appendices: [
     = Appendix A
     == Work Schedule in Winter Semester
@@ -228,6 +226,7 @@ This is a test cite @vaswani2023attentionneed.
 = Conclusion
 #lorem(100)
 
+// ==== RESUME is present only in theses which are not written in Slovak/Czech language ====
 // this code needs to be here to now show resume in table of contents (ToC) and also it makes writing resume much easier
 #set heading(numbering: none, outlined: false)
 = Resumé
