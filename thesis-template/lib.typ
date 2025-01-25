@@ -28,7 +28,7 @@
     sk: "Diplomová práca"
     )
 )
-// supplemets are for references in text but also in for the captions
+// supplemets are for references in text but also for the captions
 #let supplemets = (
   bib-name: (
     en: "References",
@@ -48,54 +48,60 @@
   )
 )
 
-// TODO: add parameter for 2nd consultant or supervisor (Departmental advisor / Consultant)
-// SK: Pedagogický vedúci - Konzultant
-// 
-// TODO: fix pagebreaks to be like in a book, where every chapter starts on odd page
-// TODO: fix numbering to be like in a book (on specific side when page is even/odd)
-// TODO: fix numbering of appendices (first fix appendices in general)
-
 #let thesis(
+  thesis-lang: "en", // For Slovak use "sk"
+  thesis-type: "bp1", // bp1, bp2, dp1, dp2, dp3, etc.
+  paper-size: "a4",
+  evidence-number: "FIIT-XXXX-XXXXX",
   title: (en: "The title of the thesis", sk: "Názov práce"),
   author: "Placeholder for name", // "name surname" with titles in double quotes
+  thesis-supervisor-name: "Placeholder for name", // "name surname" with titles in double quotes
   study-program: (en: "Informatics", sk: "Informatika"),
-  study-field: "9.2.1 Computer Science",
+  study-field: "9.2.1 Computer Science / 9.2.1 Informatika",
   workplace: "Institute of Computer Engineering and Applied Informatics, FIIT STU, Bratislava",
-  thesis-supervisor-name: "Placeholder for name",
-  thesis-type: "bp1", // bp1, bp2, dp1, dp2, dp3, etc.
-  date: (en: "", sk: ""),
-  annotations: (en: "", sk: ""),
+  date: (en: "20xx, May", sk: "Máj 20xx"),
+  assignment: none,
+  bibliography: none,
+  bib-style: "ieee",
+  underline-links: true,
+  annotations: (
+    en: [
+      Annotation text. #underline("Size should be 150-200 words.")
+      #lorem(150)
+    ],
+    sk: [
+      Text anotácie. #underline("Dĺžka by mala byť 150-200 slov.")
+      #lorem(150)
+    ],
+  ),
   acknowledgement: [
     Write your acknowledgement. #underline("Do not forget") to mention your
-    thesis supervisor. #lorem(30)
+    thesis supervisor.
+    
+    Napíšte svoje poďakovanie. #underline("Nezabudnite") spomenúť svojho vedúceho práce.
   ],
-  paper-size: "a4",
-  bibliography: none,
-  thesis-lang: "en", // For Slovak use "sk"
-  evidence-number: "FIIT-XXXX-XXXXX",
-  underline-links: true,
-  // TODO: fix assignment image, dont know if it must be .png .jpg or that typst can input .pdf
-  assignment: none,
-
-  bib-style: "ieee",
-
+  
+  list-of-abbrev: none,
+  list-of-figures: true,
+  list-of-tables: true,
   appendices: "",
-  list-of-abbrev: "",
 
   body
 ) = {
-  // setting text to selected language for typst paragraph justyfication (build-in function)
+  // setting text to selected language for typst paragraph justification (build-in function)
   set text(lang: thesis-lang)
 
+  // for translating from dictionaries
   let lang(v) = {
     return v.at(thesis-lang)
   }
 
   // document global settings
   set document(title: lang(title), author: author)
-  set page(paper: "a4")
+  set page(paper: paper-size)
   set text(font: "STIX Two Text", size: 12pt, spacing: 0.35em)
   set list(indent: 10pt, body-indent: 9pt, marker: ([•], [–], [∗]))
+  set enum(indent: 10pt, body-indent: 9pt, numbering: "1)a)i)")
   
   set std.bibliography(title: text(23pt)[#lang(supplemets.at("bib-name"))], style: bib-style)
   // line spacing (default 0.65em) src: https://github.com/typst/typst/issues/106#issuecomment-1497030336
@@ -117,8 +123,6 @@
 
   show figure.where(kind: table): set figure.caption(position: top)
   show figure.where(kind: table): set text(size: 10pt)
-
-  
 
   show figure.where(kind: table): set figure(supplement: lang(supplemets.at("table-supplement")), numbering: "1")
   show figure.where(kind: image): set figure(supplement: lang(supplemets.at("figure-supplement")), numbering: "1")
@@ -146,23 +150,23 @@
   set math.equation(numbering: "(1)")
   show math.equation: set block(spacing: 2em)
   
-  // Configure appearance of equation references
+  // configure appearance of equation references
   show ref: it => {
     if it.element != none and it.element.func() == math.equation {
-      // Override equation references.
+      // override equation references
       link(it.element.location(), numbering(
         it.element.numbering,
         ..counter(math.equation).at(it.element.location())
       ))
     } else {
-      // Other references as usual.
+      // other references as usual
       it
     }
   }
 
   // heading setup
   show heading: it => {
-    // Find out the final number of the heading counter.
+    // find out the final number of the heading counter
     let levels = counter(heading).get()
     let deepest = if levels != () {
       levels.last()
@@ -241,7 +245,9 @@
   pagebreak()
 
   // assignment
-  if assignment == none [Input your assignment using parameter "assignment" #pagebreak()] else [
+  if assignment == none [
+    Input your assignment using parameter "assignment" #pagebreak()
+  ] else [
     #image(assignment)
     #pagebreak()
   ]
@@ -264,7 +270,9 @@
     #lang((en: "In Bratislava", sk: "V Bratislave")), #lang(date)
     #set align(right)
     #v(2em)
-    .............................
+    #for letter in author {
+      [..]
+    }\.\.\.\.
     #v(1em)
     #author
   ]
@@ -272,12 +280,12 @@
   pagebreak()
 
   // acknowledgement
-  block[
+  [
     #set text(size: 17pt)
     *#lang((en: "Acknowledgement", sk: "Poďakovanie"))* \
     #v(10pt)
     #set text(size: 12pt)
-    #set par(leading: 1.5em)
+    #set par(leading: 1.5em, justify: true)
     #acknowledgement
   ]
   pagebreak()
@@ -336,15 +344,11 @@
 
   // table of contents
   set page(numbering: "I")
-
-  // TODO: make 1st level headings to be bold/strong in Table of Contents but not in List of figures etc.
   outline(title: lang((en: "Contents", sk: "Obsah")), indent: auto)
-
   pagebreak(weak: true)
 
-
   // list of abbreviations
-  [
+  if list-of-abbrev != none [
     #set heading(numbering: none, outlined: false)
     = #lang((en: "List of abbreviations", sk: "Zoznam použitých skratiek"))
     #list-of-abbrev
@@ -352,20 +356,22 @@
   pagebreak()
 
   // list of figures
-  outline(title: lang((en: "List of Figures", sk: "Zoznam použitých obrázkov")), target: figure.where(kind: image),)
-  pagebreak()
+  if list-of-figures [
+    #outline(title: lang((en: "List of Figures", sk: "Zoznam použitých obrázkov")), target: figure.where(kind: image),)
+    #pagebreak()
+  ]
 
   // list of tables
-  outline(title: lang((en: "List of Tables", sk: "Zoznam použitých tabuliek")), target: figure.where(kind: table),)
-  // pagebreak not needed because i already break before level 1 heading
-  pagebreak()
+  if list-of-tables [
+    #outline(title: lang((en: "List of Tables", sk: "Zoznam použitých tabuliek")), target: figure.where(kind: table),)
+    #pagebreak()
+  ]
 
   // paragraph setting for the body of the thesis
   set par(spacing: 3em, justify: true, leading: 1em)
   set page(numbering: "1")
   body
 
-  // TODO: fix bibliography to show in Table of Contents without numbering
   // display bibliography
   set heading(numbering: none, outlined: false)
   bibliography
