@@ -34,13 +34,14 @@ Using Typst is pretty simple, and pretty straightforward. It is basically combin
 
 ## Contributing
 
-If you want to help with perfecting this template, feel free to create an issue or a pull request.
+If you want to help with perfecting this template, feel free to create an issue or a pull request. Hopefully all issues that need to be fixed are listed in the [TODO.md](TODO.md) file.
 
 ## Credits
 
 - [Unofficial FIIT STU LaTeX Template](https://www.overleaf.com/latex/templates/stu-fiit-bachelor-thesis-template-slovak-university-of-technology/pppyykvvhqgq)
 - [Official FIIT STU thesis guidelines](https://www.fiit.stuba.sk/buxus/docs/organizacia_studia/pokyny/ZP-clenenie-pokyny_2022.pdf)
-- [Wordometer Typst package](https://typst.app/universe/package/wordometer/)
+- [charged-ieee Typst package](https://typst.app/universe/package/charged-ieee)
+- [wordometer Typst package](https://typst.app/universe/package/wordometer/)
 
 ## License
 For the license information, please check the [LICENSE](LICENSE) file.
