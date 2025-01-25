@@ -2,13 +2,21 @@
 
 #show: thesis.with(
   thesis-type: "bp1", // bp1, bp2, dp1, dp2, dp3, etc.
-  title: [Title of the Thesis], 
+  title: "Title of the Thesis", 
   author: "Janko Mrkvicka",
   thesis-supervisor-name: "Ing. Enzo Gorlomi, PhD.",
-  dateEN: [January 2025],
-  dateSK: [Január 2025],
-  annotationEN: [Annotation text. #underline("Size should be 150-200 words.") #lorem(150)],
-  annotationSK: [Text anotácie. #underline("Dĺžka by mala byť 150-200 slov.") #lorem(150)],
+  // NOTE: the english annotations actually ask for `Year, month`
+  date: (en: "2025, January", sk: "január 2025"),
+  annotations: (
+    en: [
+      Annotation text. #underline("Size should be 150-200 words.")
+      #lorem(150)
+    ],
+    sk: [
+      Text anotácie. #underline("Dĺžka by mala byť 150-200 slov.")
+      #lorem(150)
+    ],
+  ),
   index-terms: ("Index", "terms", "of", "the", "thesis"),
 
   assignment: "../assets/assignment.png", // relative path to assignment file
@@ -24,7 +32,10 @@
 
   underline-links: true,  // default true
 
-  acknowledgement: [Write your acknowledgement. #underline("Do not forget") to mention your thesis supervisor. #lorem(30)],
+  acknowledgement: [
+    Write your acknowledgement. #underline("Do not forget") to mention your
+    thesis supervisor. #lorem(30)
+  ],
   paper-size: "a4",
   thesis_lang: "en", // For Slovak use "sk"
   evidence-number: "FIIT-XXXX-XXXXX",

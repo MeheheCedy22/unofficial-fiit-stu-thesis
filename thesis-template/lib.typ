@@ -1,40 +1,36 @@
-#let universityEN = "Slovak University of Technology in Bratislava"
-#let facultyEN = "Faculty of Informatics and Information Technologies"
-#let thesis-type-nameEN = (
-  bp1: "Progress report on solution BP1",
-  bp2: "Bachelor's Thesis",
-  dp1: "Progress report on solution DP1",
-  dp2: "Progress report on solution DP2",
-  dp3: "Master's Thesis",
+#let university = (
+  en: "Slovak University of Technology in Bratislava",
+  sk: "Slovenská technická univerzita v Bratislave"
 )
-
-#let universitySK = "Slovenská technická univerzita v Bratislave"
-#let facultySK = "Fakulta informatiky a informačných technológií"
-#let thesis-type-nameSK = (
-  bp1: "Priebežná správa o riešení BP1",
-  bp2: "Bakalárska práca",
-  dp1: "Priebežná správa o riešení DP1",
-  dp2: "Priebežná správa o riešení DP2",
-  dp3: "Diplomová práca",
+#let faculty = (
+  en: "Faculty of Informatics and Information Technologies",
+  sk: "Fakulta informatiky a informačných technológií"
+)
+#let thesis-type-name = (
+  bp1: (
+    en: "Progress report on solution BP1",
+    sk: "Priebežná správa o riešení BP1"
+  ),
+  bp2: (en: "Bachelor's Thesis", sk: "Bakalárska práca"),
+  dp1: (
+    en: "Progress report on solution DP1",
+    sk: "Priebežná správa o riešení DP1"
+  ),
+  dp2: (
+    en: "Progress report on solution DP2",
+    sk: "Priebežná správa o riešení DP2"
+  ),
+  dp3: (en: "Master's Thesis", sk: "Diplomová práca")
 )
 
 #import "@preview/wordometer:0.1.4": word-count, total-words
-#import "@preview/linguify:0.4.1": *
-
-// TODO: fix this
-// #let lang_data = toml("../lang.toml")
-// #set-database(lang_data);
 
 // TODO: have it pass as argument from thesis object
 // For Slovak use "sk"
 // #set text(lang: "en")
 
-// TODO: linguify all based on lang passed as argument from thesis object
-// #linguify("annotation")  // Shows "Anotácia" in the document.
-
 // for counting words
 #show: word-count
-
 
 // TODO: add parameter for 2nd consultant or supervisor (Departmental advisor / Consultant)
 // SK: Pedagogický vedúci - Konzultant
@@ -42,13 +38,17 @@
 #let thesis(
   title: [The title of the thesis],
   author: "Placeholder for name", // "name surname" with titles in double quotes
+  studyProgram: (en: "Informatics", sk: "Informatika"),
+  studyField: "9.2.1 Computer Science",
+  workplace: "Institute of Computer Engineering and Applied Informatics, FIIT STU, Bratislava",
   thesis-supervisor-name: "Placeholder for name",
   thesis-type: "bp1", // bp1, bp2, dp1, dp2, dp3, etc.
-  dateEN: [],
-  dateSK: [],
-  annotationEN: [],
-  annotationSK: [],
-  acknowledgement: [Write your acknowledgement. #underline("Do not forget") to mention your thesis supervisor. #lorem(30)],
+  date: (en: "", sk: ""),
+  annotations: (en: "", sk: ""),
+  acknowledgement: [
+    Write your acknowledgement. #underline("Do not forget") to mention your
+    thesis supervisor. #lorem(30)
+  ],
   index-terms: (),
   paper-size: "a4",
   bibliography: none,
@@ -59,16 +59,19 @@
   assignment: none,
 
   bib-style: "ieee",
-  bib-name: [Literatúra],
-  figure-supplement: [Obrázok],
-  table-supplement: [Tabuľka],
-  section-supplement: [Sekcia],
+  bib-name: "Literatúra",
+  figure-supplement: "Obrázok",
+  table-supplement: "Tabuľka",
+  section-supplement: "Sekcia",
 
-  appendices: [],
-  list-of-abbrev: [],
+  appendices: "",
+  list-of-abbrev: "",
 
   body
 ) = {
+    let lang(v) = {
+      return v.at(thesis_lang)
+    }
 
 // =========================
   // TODO: move this to be on correct spot
@@ -118,7 +121,7 @@
 
   show figure.caption.where(kind: table): set align(center)
   show figure.caption.where(kind: image): set align(center)
-  
+
   // supplement for references and for captions are the same !
   show figure: fig => {
     let prefix = (
@@ -183,8 +186,8 @@
   [
     #set align(center)
     #set text(15pt)
-    #universityEN \
-    #facultyEN \
+    #lang(university) \
+    #lang(faculty) \
     #set text(10pt)
     #evidence-number \
     #v(30%)
@@ -193,11 +196,11 @@
     #set text(20pt)
     *#title* \
     #set text(12pt)
-    #thesis-type-nameEN.at(thesis-type)
+    #lang(thesis-type-name.at(thesis-type))
     #v(30%)
     #set align(left)
-    Thesis supervisor: #thesis-supervisor-name \
-    #dateEN \
+    #lang((en: "Supervisor", sk: "Vedúci práce")): #thesis-supervisor-name \
+    #lang(date) \
   ]
   pagebreak()
   pagebreak()
@@ -210,8 +213,8 @@
   [
     #set align(center)
     #set text(15pt)
-    #universityEN \
-    #facultyEN \
+    #lang(university) \
+    #lang(faculty) \
     #set text(10pt)
     #evidence-number \
     #v(30%)
@@ -220,14 +223,14 @@
     #set text(20pt)
     *#title* \
     #set text(12pt)
-    #thesis-type-nameEN.at(thesis-type)
+    #lang(thesis-type-name.at(thesis-type))
     #v(15%)
     #set align(left)
-    Study program: Informatics \
-    Study field: 9.2.1 Computer Science \
-    Training workplace: Institute of Computer Engineering and Applied Informatics, FIIT STU, Bratislava \
-    Thesis supervisor: #thesis-supervisor-name \
-    #dateEN \
+    #lang((en: "Study program", sk: "Študijný program")): #lang(studyProgram) \
+    #lang((en: "Study field", sk: "Študijný odbor")): #studyField \
+    #lang((en: "Training workplace", sk: "Miesto vypracovania")): #workplace \
+    Thesis Supervisor: #thesis-supervisor-name \
+    #lang(date) \
   ]
   pagebreak()
   pagebreak()
@@ -242,9 +245,18 @@
   // honest declaration
   block[
     #v(75%)
-    I honestly declare that I prepared this thesis independently, on the basis of consultations and using the cited literature.
+    #lang((
+        en: [
+            I honestly declare that I prepared this thesis independently, on
+            the basis of consultations and using the cited literature.
+        ],
+        sk: [
+            Čestne vyhlasujem, že som túto prácu vypracoval(a) samostatne, na
+            základe konzultácií a s použitím uvedenej literatúry.
+        ]
+    ))
     #v(3em)
-    In Bratislava, #dateEN
+    #lang((en: "In Bratislava", sk: "V Bratislave")), #lang(date)
     #set align(right)
     #v(2em)
     ...........................
@@ -257,7 +269,7 @@
   // acknowledgement
   block[
     #set text(size: 17pt)
-    *Acknowledgement* \
+    *#lang((en: "Acknowledgement", sk: "Poďakovanie"))* \
     #v(10pt)
     #set text(size: 12pt)
     #set par(leading: 1.5em)
@@ -266,18 +278,15 @@
   pagebreak()
   pagebreak()
 
-  // TODO: temporary solution without using the lang.toml file and linguify package
-  // annotation SLOVAK
+  let annotate(lang) = block[
+    #set text(size: 17pt)
+    *#(en: "Annotation", sk: "Anotácia").at(lang)* \
+    #v(10pt)
+    #set text(size: 12pt)
+    #set par(leading: 1.4em)
+    #university.at(lang) \
+    #upper[#faculty.at(lang)] \
 
-  block[
-    #set text(size: 17pt)
-    *Anotácia* \
-    #v(10pt)
-    #set text(size: 12pt)
-    #set par(leading: 1.4em)
-    #universitySK \
-    #upper[#facultySK] \
-  
     #table(
       // setup
       inset: (left: 0pt, right: 3em),
@@ -285,61 +294,39 @@
       stroke: none,
       columns: 2,
       // content
-      [Študijný program:],[Informatika], 
-      [Autor:], [#author],
-      [#if thesis-type.find("bp") == "bp" [
-        #thesis-type-nameSK.at("bp2"):
+      (
+        en: "Degree course:", sk: "Studijný program:"
+      ).at(lang), studyProgram.at(lang),
+      (en: "Author:", sk: "Autor:").at(lang), author,
+      if thesis-type.find("bp") == "bp" [
+        #thesis-type-name.at("bp2").at(lang):
       ] else if thesis-type.find("dp") == "dp" [
-        #thesis-type-nameSK.at("dp3"):
-      ]], [#title #lorem(10)],
-      [Vedúci #if thesis-type.find("bp") == "bp" [
-        bakalárskej
-      ] else if thesis-type.find("dp") == "dp" [
-        diplomovej] práce:], [#thesis-supervisor-name],
+        #thesis-type-name.at("dp3").at(lang):
+      ], title,
+     (
+        en: "Supervisor:",
+        sk: [
+          Vedúci #if thesis-type.find("bp") == "bp" [
+            bakalárskej
+          ] else if thesis-type.find("dp") == "dp" [
+            diplomovej
+          ] práce:
+        ]
+      ).at(lang), [#thesis-supervisor-name],
     )
-  
+
     #set text(size: 12pt)
     #set par(leading: 1.4em)
-    #dateSK
+    #date.at(lang)
     #v(1em)
-    #annotationSK
+    #annotations.at(lang)
   ]
+
+  annotate("sk")
   pagebreak()
   pagebreak()
-  
-  // annotation ENGLISH
-  block[
-    #set text(size: 17pt)
-    *Annotation* \
-    #v(10pt)
-    #set text(size: 12pt)
-    #set par(leading: 1.4em)
-    #universityEN \
-    #upper[#facultyEN] \
-  
-    #table(
-      // setup
-      inset: (left: 0pt, right: 3em),
-      align: left,
-      stroke: none,
-      columns: 2,
-      // content
-      [Degree course:],[Informatics], 
-      [Author:], [#author],
-      [#if thesis-type.find("bp") == "bp" [
-        #thesis-type-nameEN.at("bp2"):
-      ] else if thesis-type.find("dp") == "dp" [
-        #thesis-type-nameEN.at("dp3"):
-      ]], [#title #lorem(10)],
-      [Supervisor:], [#thesis-supervisor-name],
-    )
-  
-    #set text(size: 12pt)
-    #set par(leading: 1.4em)
-    #dateEN
-    #v(1em)
-    #annotationEN
-  ]
+
+  annotate("en")
   pagebreak()
 
   // table of contents
@@ -370,7 +357,7 @@
   outline(title: [List of Tables], target: figure.where(kind: table),)
   // pagebreak not needed because i already break before level 1 heading
   pagebreak()
-  
+
   // paragraph setting for the body of the thesis
   set par(spacing: 3em, justify: true, leading: 1em)
   set page(numbering: "1")
