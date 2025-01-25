@@ -5,8 +5,12 @@
   title: (en: "The title of the thesis", sk: "Názov práce"),
   author: "Janko Mrkvicka",
   thesis-supervisor-name: "Ing. Enzo Gorlomi, PhD.",
+  // input 'studyField' and 'workplace' parameters based on language (used only once in document)
+  // defaults are in english
+  studyField: "9.2.1 Computer Science / Informatika",
+  workplace: "Institute of Computer ... / Ústav počítačového ...",
   // NOTE: the english annotations actually ask for `Year, month`
-  date: (en: "2025, January", sk: "január 2025"),
+  date: (en: "2025, January", sk: "Január 2025"),
   annotations: (
     en: [
       Annotation text. #underline("Size should be 150-200 words.")
@@ -17,7 +21,6 @@
       #lorem(150)
     ],
   ),
-  index-terms: ("Index", "terms", "of", "the", "thesis"),
 
   assignment: "../assets/assignment.png", // relative path to assignment file
 
@@ -25,19 +28,17 @@
   bibliography: bibliography("refs.bib"),
   bib-style: "ieee", // style alternative "iso-690-numeric"
 
-  bib-name: [References], // defaults are in Slovak
-  figure-supplement: [Figure], // defaults are in Slovak
-  table-supplement: [Table], // defaults are in Slovak
-  section-supplement: [Section], // defaults are in Slovak
-
+  // you still can underline links individually when set to false 
   underline-links: true,  // default true
 
   acknowledgement: [
     Write your acknowledgement. #underline("Do not forget") to mention your
-    thesis supervisor. #lorem(30)
+    thesis supervisor. 
+    
+    Napíšte svoje poďakovanie. #underline("Nezabudnite") spomenúť svojho vedúceho práce.
   ],
   paper-size: "a4",
-  thesis-lang: "en", // For Slovak use "sk"
+  thesis-lang: "sk", // For Slovak use "sk"
   evidence-number: "FIIT-XXXX-XXXXX",
 
   list-of-abbrev: [

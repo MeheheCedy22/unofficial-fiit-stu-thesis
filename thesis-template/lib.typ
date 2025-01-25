@@ -33,6 +33,25 @@
     sk: "Diplomová práca"
     )
 )
+// supplemets are for references in text but also in for the captions
+#let supplemets = (
+  bib-name: (
+    en: "References",
+    sk: "Literatúra"
+  ),
+  figure-supplement: (
+    en: "Figure",
+    sk: "Obrázok"
+  ),
+  table-supplement: (
+    en: "Table",
+    sk: "Tabuľka"
+  ),
+  section-supplement: (
+    en: "Section",
+    sk: "Sekcia"
+  )
+)
 
 // TODO: add parameter for 2nd consultant or supervisor (Departmental advisor / Consultant)
 // SK: Pedagogický vedúci - Konzultant
@@ -55,7 +74,6 @@
     Write your acknowledgement. #underline("Do not forget") to mention your
     thesis supervisor. #lorem(30)
   ],
-  index-terms: (),
   paper-size: "a4",
   bibliography: none,
   thesis-lang: "en", // For Slovak use "sk"
@@ -65,10 +83,6 @@
   assignment: none,
 
   bib-style: "ieee",
-  bib-name: "Literatúra",
-  figure-supplement: "Obrázok",
-  table-supplement: "Tabuľka",
-  section-supplement: "Sekcia",
 
   appendices: "",
   list-of-abbrev: "",
@@ -98,11 +112,12 @@
   set page(paper: "a4")
   set text(font: "STIX Two Text", size: 12pt, spacing: 0.35em)
   set list(indent: 10pt, body-indent: 9pt, marker: ([•], [–], [∗]))
-  set std.bibliography(title: text(23pt)[#bib-name], style: bib-style)
+  
+  set std.bibliography(title: text(23pt)[#lang(supplemets.at("bib-name"))], style: bib-style)
   // line spacing (default 0.65em) src: https://github.com/typst/typst/issues/106#issuecomment-1497030336
   set par(leading: 1.5em)
-  set heading(numbering: "1.1.1.", supplement: section-supplement)
-
+  set heading(numbering: "1.1.1.", supplement: lang(supplemets.at("section-supplement")))
+  
   // underline all links based on user choice
   show link: it => {
     if underline-links {
@@ -119,8 +134,10 @@
   show figure.where(kind: table): set figure.caption(position: top)
   show figure.where(kind: table): set text(size: 10pt)
 
-  show figure.where(kind: table): set figure(supplement: table-supplement, numbering: "1")
-  show figure.where(kind: image): set figure(supplement: figure-supplement, numbering: "1")
+  
+
+  show figure.where(kind: table): set figure(supplement: lang(supplemets.at("table-supplement")), numbering: "1")
+  show figure.where(kind: image): set figure(supplement: lang(supplemets.at("figure-supplement")), numbering: "1")
 
   show figure.caption: set text(size: 10pt)
   show figure.caption: set align(start)
@@ -131,8 +148,8 @@
   // supplement for references and for captions are the same !
   show figure: fig => {
     let prefix = (
-      if fig.kind == table [#table-supplement]
-      else if fig.kind == image [#figure-supplement]
+      if fig.kind == table [#lang(supplemets.at("table-supplement"))]
+      else if fig.kind == image [#lang(supplemets.at("figure-supplement"))]
       else [#fig.supplement]
     )
     let numbers = numbering(fig.numbering, ..fig.counter.at(fig.location()))
@@ -210,10 +227,6 @@
   pagebreak()
   pagebreak()
 
-  // TODO: add study program and field based on user params or something
-  // and also add user param for training workplace
-  // and also fix margings of the page because it wil fail brutaly when other data inputed
-
   // title page
   [
     #set align(center + top)
@@ -233,7 +246,7 @@
     #lang((en: "Study program", sk: "Študijný program")): #lang(studyProgram) \
     #lang((en: "Study field", sk: "Študijný odbor")): #studyField \
     #lang((en: "Training workplace", sk: "Miesto vypracovania")): #workplace \
-    Thesis Supervisor: #thesis-supervisor-name \
+    #lang((en: "Supervisor", sk: "Vedúci práce")): #thesis-supervisor-name \
     #lang(date) \
   ]
   pagebreak()
