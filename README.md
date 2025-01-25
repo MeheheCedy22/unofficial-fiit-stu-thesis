@@ -40,10 +40,7 @@ If you want to help with perfecting this template, feel free to create an issue 
 
 - [Unofficial FIIT STU LaTeX Template](https://www.overleaf.com/latex/templates/stu-fiit-bachelor-thesis-template-slovak-university-of-technology/pppyykvvhqgq)
 - [Official FIIT STU thesis guidelines](https://www.fiit.stuba.sk/buxus/docs/organizacia_studia/pokyny/ZP-clenenie-pokyny_2022.pdf)
-
-Currently not used in the template:
 - [Wordometer Typst package](https://typst.app/universe/package/wordometer/)
-- [Linguify Typst package](https://typst.app/universe/package/linguify/)
 
 ## License
 For the license information, please check the [LICENSE](LICENSE) file.
