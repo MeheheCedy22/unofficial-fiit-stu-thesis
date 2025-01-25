@@ -79,7 +79,7 @@
   thesis-lang: "en", // For Slovak use "sk"
   evidence-number: "FIIT-XXXX-XXXXX",
   underline-links: true,
-  // TODO: fix assignmetn image, dont know if it must be .png .jpg or that typst can input .pdf
+  // TODO: fix assignment image, dont know if it must be .png .jpg or that typst can input .pdf
   assignment: none,
 
   bib-style: "ieee",
@@ -89,24 +89,10 @@
 
   body
 ) = {
-    let lang(v) = {
-      return v.at(thesis-lang)
-    }
+  let lang(v) = {
+    return v.at(thesis-lang)
+  }
 
-// =========================
-  // TODO: move this to be on correct spot
-  // reset numbering and start counting
-  // counter(page).update(0)
-  // set page(numbering: "1")
-  // 
-  // TODO: use this code somewhere
-  // if thesis-type.find("bp") == "bp" [
-  //   #thesis-type-nameEN.at("bp2")
-  // ] else if thesis-type.find("dp") == "dp" [
-  //   #thesis-type-nameEN.at("dp3")
-  // ]
-
-// =========================
   // document global settings
   set document(title: lang(title), author: author)
   set page(paper: "a4")
@@ -349,7 +335,7 @@
   // table of contents
   set page(numbering: "I")
 
-  // TODO: make 1st level headings to be bol in Table of Contents but not in List of figgurec etc.
+  // TODO: make 1st level headings to be bold/strong in Table of Contents but not in List of figures etc.
   outline(title: lang((en: "Contents", sk: "Obsah")), indent: auto)
 
   pagebreak(weak: true)

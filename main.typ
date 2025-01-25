@@ -38,7 +38,7 @@
     Napíšte svoje poďakovanie. #underline("Nezabudnite") spomenúť svojho vedúceho práce.
   ],
   paper-size: "a4",
-  thesis-lang: "sk", // For Slovak use "sk"
+  thesis-lang: "en", // For Slovak use "sk"
   evidence-number: "FIIT-XXXX-XXXXX",
 
   list-of-abbrev: [
@@ -86,7 +86,7 @@
       ),
     )
 
-    // TODO: fix 2nd and deeper heading to not show or show properly in Table of Contents
+    // TODO: fix 2nd and deeper heading to not show or show properly in Table of Contents for appendices
     // need to manually write this for now, because numbering is off globally for appendix and it will break other things
     === A.1 Plan Evaluation
     #lorem(100)
