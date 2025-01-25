@@ -1,4 +1,8 @@
 #import "thesis-template/lib.typ": thesis
+#import "@preview/wordometer:0.1.4": word-count, total-words
+
+// for counting words
+#show: word-count
 
 #show: thesis.with(
   thesis-type: "bp1", // bp1, bp2, dp1, dp2, dp3, etc.
@@ -110,7 +114,7 @@
 
 // =============== HERE YOU CAN START WRITING YOUR THESIS ===============
 
-= Introduction
+= Introduction <sec:intro>
 #lorem(100)
 
 @tab:example shows example of table in this template. #lorem(10)
@@ -135,6 +139,32 @@
   caption: [Test image]
 ) <fig:test-image>
 
+== Typst equation showcase
+ This is inline $f(x) = a dot x^2 + b dot x + c$ equation. You cannot number not reference inline equation.
+
+This is an example of equation which have numbering and you can reference it.
+
+Entropy:
+
+$
+  H(S) = sum_(n=1)^C -p_i dot log_2(p_i)
+$ <eq:entropy>
+
+Equation @eq:entropy shows how entropy is calculated. For math symbols check Typst documentation on math/symbols.
+
+== Another Typst references
+
+We explained this in @sec:intro.
+
+This is a test cite @vaswani2023attentionneed.
+
+// you can remove this anytime, it is just for your information and testing for how many words are in this document (idk about accuracy, but seems good)
+#text(stroke: 0.3pt + red)[
+  Bachelor thesis should have 40 standard pages (recommended). One standard page is defined as 1800 characters per page. This is calculated as 30 rows #sym.times 60 characters per row. You can also calculate it as \~250 words per standard page. This means that you need \~10,000 words for this document.
+
+  There is total of #underline([#total-words / 10000]) words in this document to fullfil the requirements of the thesis. Note that there are so many words because of lorem ipsum text.
+]
+
 = Analysis
 #lorem(100)
 
@@ -148,8 +178,6 @@
 #lorem(100)
 
 == Benefits of Origami
-
-This is a test cite @vaswani2023attentionneed.
 #lorem(100)
 
 === Stress-Relief Benefits
