@@ -196,7 +196,6 @@
     #lang(faculty) \
     #set text(10pt)
     #evidence-number \
-    #v(30%)
     #set align(center + horizon)
     #set text(15pt)
     *#author* \
@@ -204,7 +203,6 @@
     *#lang(title)* \
     #set text(12pt)
     #lang(thesis-type-name.at(thesis-type))
-    #v(30%)
     #set align(left + bottom)
     #lang((en: "Supervisor", sk: "Vedúci práce")): #thesis-supervisor-name \
     #lang(date) \
@@ -224,7 +222,6 @@
     #lang(faculty) \
     #set text(10pt)
     #evidence-number \
-    #v(30%)
     #set align(center + horizon)
     #set text(15pt)
     *#author* \
@@ -232,7 +229,6 @@
     *#lang(title)* \
     #set text(12pt)
     #lang(thesis-type-name.at(thesis-type))
-    #v(15%)
     #set align(left + bottom)
     #lang((en: "Study program", sk: "Študijný program")): #lang(studyProgram) \
     #lang((en: "Study field", sk: "Študijný odbor")): #studyField \
