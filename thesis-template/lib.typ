@@ -1,8 +1,3 @@
-#import "@preview/wordometer:0.1.4": word-count, total-words
-// for counting words
-#show: word-count
-
-
 #let university = (
   en: "Slovak University of Technology in Bratislava",
   sk: "Slovenská technická univerzita v Bratislave"
@@ -147,6 +142,10 @@
   }
 
   // references setup
+  // configure equation numbering and spacing
+  set math.equation(numbering: "(1)")
+  show math.equation: set block(spacing: 2em)
+  
   // Configure appearance of equation references
   show ref: it => {
     if it.element != none and it.element.func() == math.equation {
