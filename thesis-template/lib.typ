@@ -63,8 +63,8 @@
 #let thesis(
   title: (en: "The title of the thesis", sk: "Názov práce"),
   author: "Placeholder for name", // "name surname" with titles in double quotes
-  studyProgram: (en: "Informatics", sk: "Informatika"),
-  studyField: "9.2.1 Computer Science",
+  study-program: (en: "Informatics", sk: "Informatika"),
+  study-field: "9.2.1 Computer Science",
   workplace: "Institute of Computer Engineering and Applied Informatics, FIIT STU, Bratislava",
   thesis-supervisor-name: "Placeholder for name",
   thesis-type: "bp1", // bp1, bp2, dp1, dp2, dp3, etc.
@@ -89,6 +89,9 @@
 
   body
 ) = {
+  // setting text to selected language for typst paragraph justyfication (build-in function)
+  set text(lang: thesis-lang)
+
   let lang(v) = {
     return v.at(thesis-lang)
   }
@@ -229,8 +232,8 @@
     #set text(12pt)
     #lang(thesis-type-name.at(thesis-type))
     #set align(left + bottom)
-    #lang((en: "Study program", sk: "Študijný program")): #lang(studyProgram) \
-    #lang((en: "Study field", sk: "Študijný odbor")): #studyField \
+    #lang((en: "Study program", sk: "Študijný program")): #lang(study-program) \
+    #lang((en: "Study field", sk: "Študijný odbor")): #study-field \
     #lang((en: "Training workplace", sk: "Miesto vypracovania")): #workplace \
     #lang((en: "Supervisor", sk: "Vedúci práce")): #thesis-supervisor-name \
     #lang(date) \
@@ -246,8 +249,8 @@
   pagebreak()
 
   // honest declaration
-  block[
-    #v(75%)
+  [
+    #set align(bottom)
     #lang((
         en: [
             I honestly declare that I prepared this thesis independently, on
@@ -262,7 +265,7 @@
     #lang((en: "In Bratislava", sk: "V Bratislave")), #lang(date)
     #set align(right)
     #v(2em)
-    ...........................
+    .............................
     #v(1em)
     #author
   ]
@@ -299,7 +302,7 @@
       // content
       (
         en: "Degree course:", sk: "Studijný program:"
-      ).at(lang), studyProgram.at(lang),
+      ).at(lang), study-program.at(lang),
       (en: "Author:", sk: "Autor:").at(lang), author,
       if thesis-type.find("bp") == "bp" [
         #thesis-type-name.at("bp2").at(lang):
@@ -319,7 +322,7 @@
     )
 
     #set text(size: 12pt)
-    #set par(leading: 1.4em)
+    #set par(leading: 1.4em, justify: true)
     #date.at(lang)
     #v(1em)
     #annotations.at(lang)

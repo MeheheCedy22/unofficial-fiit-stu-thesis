@@ -5,9 +5,10 @@
   title: (en: "The title of the thesis", sk: "Názov práce"),
   author: "Janko Mrkvicka",
   thesis-supervisor-name: "Ing. Enzo Gorlomi, PhD.",
-  // input 'studyField' and 'workplace' parameters based on language (used only once in document)
+  study-program: (en: "Informatics", sk: "Informatika"),
+  // input 'study-field' and 'workplace' parameters based on language (used only once in document)
   // defaults are in english
-  studyField: "9.2.1 Computer Science / Informatika",
+  study-field: "9.2.1 Computer Science / Informatika",
   workplace: "Institute of Computer ... / Ústav počítačového ...",
   // NOTE: the english annotations actually ask for `Year, month`
   date: (en: "2025, January", sk: "Január 2025"),
