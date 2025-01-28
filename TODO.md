@@ -3,7 +3,8 @@ TODOs:
 - [x] add `none`/`false` option for list of tables (not show if none)
 - [x] add `none`/`false` option for list of abbreviations (not show if none)
 - [ ] add parameter for 2nd consultant or supervisor (Departmental advisor / Consultant) SK: Pedagogický vedúci - Konzultant
-- [ ] fix pagebreaks to be like in a book, where every chapter starts on odd page
+- [x] fix pagebreaks to be like in a book, where every chapter starts on odd page
+- [ ] ^^^ idk about this for appendices if they should start on odd page or not
 - [ ] fix numbering to be like in a book (on specific side when page is even/odd)
 - [ ] fix numbering of appendices (first fix appendices in general !!)
 - [ ] assignment image, dont know if it must be .png .jpg or that typst can input .pdf

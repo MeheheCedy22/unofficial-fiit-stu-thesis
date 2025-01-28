@@ -175,7 +175,8 @@
     }
 
     if it.level == 1 {
-      pagebreak()
+      // start each new chapter (1st level heading) on odd page like in a book
+      pagebreak(to: "odd", weak: true)
       set text(size: 23pt)
       show: block.with(above: 15pt, below: 2em, sticky: true)
       if it.numbering != none {
@@ -216,8 +217,7 @@
     #lang((en: "Supervisor", sk: "Vedúci práce")): #thesis-supervisor-name \
     #lang(date) \
   ]
-  pagebreak()
-  pagebreak()
+  pagebreak(to: "odd")
 
   // title page
   [
@@ -241,17 +241,15 @@
     #lang((en: "Supervisor", sk: "Vedúci práce")): #thesis-supervisor-name \
     #lang(date) \
   ]
-  pagebreak()
-  pagebreak()
+  pagebreak(to: "odd")
 
   // assignment
   if assignment == none [
-    Input your assignment using parameter "assignment" #pagebreak()
+    Input your assignment as `.png` / `.jpg` (`.jpeg`) / `.gif` / `.svg` using parameter "assignment" (those are the only supported image formats for now)
   ] else [
     #image(assignment)
-    #pagebreak()
   ]
-  pagebreak()
+  pagebreak(to: "odd")
 
   // honest declaration
   [
@@ -276,8 +274,7 @@
     #v(1em)
     #author
   ]
-  pagebreak()
-  pagebreak()
+  pagebreak(to: "odd")
 
   // acknowledgement
   [
@@ -288,8 +285,7 @@
     #set par(leading: 1.5em, justify: true)
     #acknowledgement
   ]
-  pagebreak()
-  pagebreak()
+  pagebreak(to: "odd")
 
   let annotate(lang) = block[
     #set text(size: 17pt)
@@ -336,35 +332,34 @@
   ]
 
   annotate("sk")
-  pagebreak()
-  pagebreak()
+  pagebreak(to: "odd")
 
   annotate("en")
-  pagebreak()
+  pagebreak(to: "odd")
 
   // table of contents
   set page(numbering: "I")
   outline(title: lang((en: "Contents", sk: "Obsah")), indent: auto)
-  pagebreak(weak: true)
+  pagebreak(to: "odd")
 
   // list of abbreviations
   if list-of-abbrev != none [
     #set heading(numbering: none, outlined: false)
     = #lang((en: "List of abbreviations", sk: "Zoznam použitých skratiek"))
     #list-of-abbrev
+    #pagebreak(to: "odd")
   ]
-  pagebreak()
 
   // list of figures
   if list-of-figures [
     #outline(title: lang((en: "List of Figures", sk: "Zoznam použitých obrázkov")), target: figure.where(kind: image),)
-    #pagebreak()
+    #pagebreak(to: "odd")
   ]
 
   // list of tables
   if list-of-tables [
     #outline(title: lang((en: "List of Tables", sk: "Zoznam použitých tabuliek")), target: figure.where(kind: table),)
-    #pagebreak()
+    #pagebreak(to: "odd")
   ]
 
   // paragraph setting for the body of the thesis
