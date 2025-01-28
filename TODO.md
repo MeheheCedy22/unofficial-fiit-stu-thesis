@@ -12,4 +12,4 @@ TODOs:
 - [ ] make 1st level headings to be bold/strong in Table of Contents but not in List of figures, and list of tables
 - [ ] fix bibliography to show in Table of Contents without numbering
 - [ ] fix 2nd and deeper level headings to not show or show properly in Table of Contents for appendices
-- [ ] fix the counter to now show numbering on blank pages before ToC (Table of Contents) and Introduction
+- [ ] fix the counter to now show numbering on blank pages before ToC (Table of Contents) and Introduction (on blank pages in general)
