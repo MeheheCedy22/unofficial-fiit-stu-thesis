@@ -7,9 +7,10 @@ TODOs:
 - [ ] ^^^ idk about this for appendices if they should start on odd page or not
 - [ ] fix numbering to be like in a book (on specific side when page is even/odd)
 - [ ] fix numbering of appendices (first fix appendices in general !!)
-- [ ] assignment image, dont know if it must be .png .jpg or that typst can input .pdf
+- [ ] numbering for appendices is OKAY in ToC, however in the document itself it shows number instead of letter for heading 1, also the page numbering for appendices is broken
+- [ ] assignment image, dont know if it must be .png .jpg or that typst can input .pdf (test the .pdf input method as it was added in new compiler version 0.13.x i think)
 - [ ] maybe make honest declaration as user input because of `vypracoval(a)` is gender dependent
 - [ ] make 1st level headings to be bold/strong in Table of Contents but not in List of figures, and list of tables
-- [ ] fix bibliography to show in Table of Contents without numbering
-- [ ] fix 2nd and deeper level headings to not show or show properly in Table of Contents for appendices
+- [x] (NOTE: this was not problem, bibliography should not be in ToC) fix bibliography to show in Table of Contents without numbering
+- [x] fix 2nd and deeper level headings to not show or show properly in Table of Contents for appendices
 - [ ] fix the counter to now show numbering on blank pages before ToC (Table of Contents) and Introduction (on blank pages in general)
