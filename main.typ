@@ -17,6 +17,7 @@
   study-field: "9.2.1 Computer Science / 9.2.1 Informatika",
   workplace: "Institute of Computer ... / Ústav počítačového ...",
   date: (en: "2025, January", sk: "Január 2025"),
+  // the file must be .pdf format, images is used as an example, new compiler should support PDFs
   assignment: "../assets/assignment.png", // relative path to assignment file
   bibliography: bibliography("refs.bib"),
   // parameter -- full: true -> show all references without citing
@@ -73,12 +74,13 @@
 
   // appendices needs to be written here manually to not break other things (for now)
   appendices: [
-    = Appendix A
-    == Work Schedule in Winter Semester
+    = Work schedule throughout semesters
+
+    == Winter semester
     #figure(
       table(
         columns: 2,
-        [*Semester week number *], [*Info*],
+        [*Semester week number *], [*Description*],
         [1],[#lorem(8)],
         [2],[#lorem(8)],
         [3],[#lorem(8)],
@@ -94,20 +96,40 @@
       ),
     )
 
-    // need to manually write this for now, because numbering is off globally for appendix and it will break other things
-    === A.1 Plan Evaluation
-    #lorem(100)
+    === Plan Evaluation
+    #lorem(50)
 
-    = Appendix B
+    == Summer semester
+    #figure(
+      table(
+        columns: 2,
+        [*Semester week number *], [*Description*],
+        [1],[#lorem(8)],
+        [2],[#lorem(8)],
+        [3],[#lorem(8)],
+        [4],[#lorem(8)],
+        [5],[#lorem(8)],
+        [6],[#lorem(8)],
+        [7],[#lorem(8)],
+        [8],[#lorem(8)],
+        [9],[#lorem(8)],
+        [10],[#lorem(8)],
+        [12],[#lorem(8)],
+        [12],[#lorem(8)],
+      ),
+    )
+    === Plan Evaluation
+    #lorem(50)
 
-    == Survey questions
+    // You can call it technical documentation
+    = Contents of Included CD–ROM
 
+    = Use of AI in the thesis
     #lorem(50)
 
     #figure(
       image("assets/Test.svg")
     )
-
   ]
 )
 // counter reset
@@ -140,7 +162,7 @@
   caption: [Test image]
 ) <fig:test-image>
 
-== Typst equation showcase
+== Typst equation showcase (\<- explainer)
  This is inline $f(x) = a dot x^2 + b dot x + c$ equation. You cannot number not reference inline equation.
 
 This is an example of equation which have numbering and you can reference it.
@@ -153,7 +175,7 @@ $ <eq:entropy>
 
 Equation @eq:entropy shows how entropy is calculated. For math symbols check Typst documentation on math/symbols.
 
-== Another Typst references
+== Another Typst references (\<- explainer)
 
 We explained this in @sec:intro.
 
@@ -168,6 +190,8 @@ This is a test cite of more than one reference @vaswani2023attentionneed @einste
 
   There is total of #underline([#total-words / 10000]) words in this document to fullfil the requirements of the thesis. Note that there are so many words because of lorem ipsum text.
 ]
+
+#pagebreak()
 
 - Example of bulleted list
   - indented
@@ -187,54 +211,9 @@ This is a test cite of more than one reference @vaswani2023attentionneed @einste
 + #lorem(4)
 
 = Analysis
-#lorem(100)
+#lorem(500)
 
-== History of Paperclips
-#lorem(100)
-
-=== Manufacturing Process
-#lorem(100)
-
-=== Innovations in Design
-#lorem(100)
-
-== Benefits of Origami
-#lorem(100)
-
-=== Stress-Relief Benefits
-#lorem(100)
-
-=== Environmental Impact
-#lorem(100)
-
-=== Artistic Applications
-#lorem(100)
-
-== Mysteries of Black Holes
-#lorem(30)
-
-=== Accretion Disks
-#lorem(100)
-
-== Recipes for Success
-#lorem(100)
-
-== Laws of Motion
-#lorem(100)
-
-=== Newtonian Mechanics
-#lorem(50)
-
-=== Relativity
-#lorem(50)
-
-=== Quantum Implications
-#lorem(50)
-
-=== Practical Applications
-#lorem(50)
-
-= Experimenting
+= Evaluation
 #lorem(10)
 @fig:test-image2 shows test image. #lorem(20)
 
@@ -257,28 +236,18 @@ This is a test cite of more than one reference @vaswani2023attentionneed @einste
 
 #lorem(100)
 
-== Wonders of Jellyfish
-#lorem(100)
-
-= Evaluation
-
-== Benefits of Duct Tape
-#lorem(100)
-
-== Secrets of Ancient Cartography
-#lorem(100)
-
-== Strategies for Surviving Sharknadoes
-#lorem(100)
-
-= Guidelines for users
+= Related work
 #lorem(100)
 
 = Conclusion
-#lorem(100)
+== Summary
+#lorem(50)
+== Future work
+#lorem(50)
 
 // ==== RESUME is present only in theses which are not written in Slovak/Czech language ====
 // this code needs to be here to now show resume in table of contents (ToC) and also it makes writing resume much easier
-#set heading(numbering: none, outlined: false)
 = Resumé
+(only if your thessis is in english, 10\% of the thesis)
+
 #lorem(100)
