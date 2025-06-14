@@ -373,7 +373,11 @@
 
   // appendices
   [
-    #set heading(numbering: none, outlined: true)
+  #counter(page).update(0)
+  #counter(heading).update(0)
+    // #set heading(numbering: none, outlined: true)
+    #set heading(numbering: "A.1", outlined: true)
+    #set page(numbering: "A-1")
     #set figure(outlined: false)
     #appendices
   ]
