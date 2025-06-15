@@ -1,4 +1,5 @@
 #import "@preview/muchpdf:0.1.0": muchpdf
+#import "@preview/numbly:0.1.0": numbly
 
 #let university = (
   en: "Slovak University of Technology in Bratislava",
@@ -356,6 +357,15 @@
 
   // table of contents
   set page(numbering: "I")
+  // make 1st level headings bold in the outline
+  show outline.entry: it => {
+    if it.element != none and it.element.func() == heading and it.level == 1 {
+      strong(it)
+    } else {
+      it
+    }
+  }
+
   outline(title: lang((en: "Contents", sk: "Obsah")), indent: auto)
   pagebreak(to: "odd")
 
@@ -391,6 +401,13 @@
 
   // appendices
   [
+    // #set heading(numbering: numbly(
+    //   "Appendix {1:A}.", // use {level:format} to specify the format
+    //   "{1:A}.{2}", // if format is not specified, arabic numbers will be used
+    //   "{1:A}.{2}.{3}", // here, we only want the 3rd level
+    // ))
+
+
     // #set heading(numbering: none, outlined: true)
     #set heading(numbering: "A.1", outlined: true)
     #set page(numbering: "A-1")

@@ -10,7 +10,7 @@ TODOs:
 - [ ] numbering for appendices is OKAY in ToC, however in the document itself it shows number instead of letter for heading 1, also the page numbering for appendices is broken
 - [x] assignment image, dont know if it must be .png .jpg or that typst can input .pdf (test the .pdf input method as it was added in new compiler version 0.13.x i think)
 - [x] maybe make honest declaration as user input because of `vypracoval(a)` is gender dependent (NOTE: the slovak version with `vypracoval(a)` is okay and this was not needed to be changed)
-- [ ] make 1st level headings to be bold/strong in Table of Contents but not in List of figures, and list of tables
+- [x] make 1st level headings to be bold/strong in Table of Contents but not in List of figures, and list of tables
 - [x] fix bibliography to show in Table of Contents without numbering (it should actually be there as the guidelines say)
 - [x] fix 2nd and deeper level headings to not show or show properly in Table of Contents for appendices
 - [ ] fix the counter to now show numbering on blank pages before ToC (Table of Contents) and Introduction (on blank pages in general)
