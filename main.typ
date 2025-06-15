@@ -12,13 +12,16 @@
   title: (en: "The title of the thesis", sk: "Názov práce"),
   author: "Janko Mrkvicka", // name with titles
   thesis-supervisor-name: "Ing. Enzo Gorlomi, PhD.", // name with titles
+  // departmental-advisor == pedagogical supervisor == pedagogický vedúci
+  // if you dont have additional supervisor set `departmental-advisor` to `none`
+  departmental-advisor: "doc. Ing. Dominick DeCocco, PhD.", // name with titles
   study-program: (en: "Informatics", sk: "Informatika"),
   // input 'study-field' and 'workplace' parameters in language of your thesis (used only once in document)
   study-field: "9.2.1 Computer Science / 9.2.1 Informatika",
   workplace: "Institute of Computer ... / Ústav počítačového ...",
   date: (en: "2025, January", sk: "Január 2025"),
-  // the file must be .pdf format, images is used as an example, new compiler should support PDFs
-  assignment: "../assets/assignment.png", // relative path to assignment file
+  // uncomment line below and enter relative path to assignment file which must be in `.pdf` format
+  // assignment: "../assets/assignment.pdf",
   bibliography: bibliography("refs.bib"),
   // parameter -- full: true -> show all references without citing
   bib-style: "ieee", // style alternative "iso-690-numeric", default: "ieee"
@@ -26,13 +29,13 @@
   underline-links: true,  // default true
 
   annotations: (
-    en: [
-      Annotation text. #underline("Size should be 150-200 words.")
-      #lorem(150)
-    ],
     sk: [
       Text anotácie. #underline("Dĺžka by mala byť 150-200 slov.")
-      #lorem(150)
+      #lorem(200)
+    ],
+    en: [
+      Annotation text. #underline("Size should be 150-200 words.")
+      #lorem(200)
     ],
   ),
 
@@ -74,6 +77,8 @@
 
   // appendices needs to be written here manually to not break other things (for now)
   appendices: [
+  #counter(page).update(0)
+  #counter(heading).update(0)
     = Work schedule throughout semesters
 
     == Winter semester
@@ -122,7 +127,7 @@
     #lorem(50)
 
     // You can call it technical documentation
-    = Contents of Included CD–ROM
+    = Contents of Included CD-ROM
 
     = Use of AI in the thesis
     #lorem(50)

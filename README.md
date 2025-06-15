@@ -42,6 +42,6 @@ If you want to help with perfecting this template, feel free to create an issue 
 - [Official FIIT STU thesis guidelines](https://www.fiit.stuba.sk/buxus/docs/organizacia_studia/pokyny/ZP-clenenie-pokyny_2022.pdf)
 - [charged-ieee Typst package](https://typst.app/universe/package/charged-ieee)
 - [wordometer Typst package](https://typst.app/universe/package/wordometer/)
-
+- [muchpdf Typst package](https://typst.app/universe/package/muchpdf/)
 ## License
 For the license information, please check the [LICENSE](LICENSE) file.
