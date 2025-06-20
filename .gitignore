@@ -4,5 +4,5 @@
 *.jpeg
 *.png
 *.svg
-!assets/*
+!thesis-template/assets/**
 !main.pdf
