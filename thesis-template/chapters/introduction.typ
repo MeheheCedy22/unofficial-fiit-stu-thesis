@@ -1,6 +1,5 @@
 #import "@preview/wordometer:0.1.4": word-count, total-words
 
-
 = Introduction <sec:intro>
 #lorem(100)
 
@@ -52,7 +51,7 @@ This is a test cite of more than one reference @vaswani2023attentionneed @einste
 #text(stroke: 0.3pt + red)[
   Bachelor thesis should have 40 standard pages (recommended). One standard page is defined as 1800 characters per page. This is calculated as 30 rows #sym.times 60 characters per row. You can also calculate it as \~250 words per standard page. This means that you need \~10,000 words for this document.
 
-  There is total of #underline([#total-words / 10000]) words in this document to fullfil the requirements of the thesis. Note that there are so many words because of lorem ipsum text.
+  There is total of #underline([#total-words / 10000]) words in this document to fullfil the requirements of the thesis. Note that there are so many words because of lorem ipsum text. Also note that the accuracy of the word count is not perfect, but it is good enough for this purpose.
 ]
 
 #pagebreak()
