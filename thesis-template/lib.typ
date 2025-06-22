@@ -375,7 +375,7 @@
     // Force a page break first
     pagebreak(weak: true)
 
-    // Reset the page counter for EVERY appendix section
+    // Reset page counter to 1 for each new appendix
     counter(page).update(1)
 
     // Render the heading
