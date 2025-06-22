@@ -1,69 +1,25 @@
 #import "@preview/muchpdf:0.1.0": muchpdf
-#import "@preview/numbly:0.1.0": numbly
+#import "translations.typ": *
 
-#let university = (
-  en: "Slovak University of Technology in Bratislava",
-  sk: "Slovenská technická univerzita v Bratislave",
-)
-#let faculty = (
-  en: "Faculty of Informatics and Information Technologies",
-  sk: "Fakulta informatiky a informačných technológií",
-)
-#let thesis-type-name = (
-  bp1: (
-    en: "Progress report on solution BP1",
-    sk: "Priebežná správa o riešení BP1",
-  ),
-  bp2: (
-    en: "Bachelor's Thesis",
-    sk: "Bakalárska práca",
-  ),
-  dp1: (
-    en: "Progress report on solution DP1",
-    sk: "Priebežná správa o riešení DP1",
-  ),
-  dp2: (
-    en: "Progress report on solution DP2",
-    sk: "Priebežná správa o riešení DP2",
-  ),
-  dp3: (
-    en: "Master's Thesis",
-    sk: "Diplomová práca",
-  ),
-)
-// supplemets are for references in text but also for the captions
-#let supplemets = (
-  bib-name: (
-    en: "References",
-    sk: "Literatúra",
-  ),
-  figure-supplement: (
-    en: "Figure",
-    sk: "Obrázok",
-  ),
-  table-supplement: (
-    en: "Table",
-    sk: "Tabuľka",
-  ),
-  section-supplement: (
-    en: "Section",
-    sk: "Sekcia",
-  ),
-)
+#let page-break(to: "odd", weak: true) = {
+  set page(numbering: none)
+  pagebreak(to: to, weak: weak)
+  set page(numbering: "1")
+}
 
 #let thesis(
   thesis-lang: "en", // For Slovak use "sk"
   thesis-type: "bp1", // bp1, bp2, dp1, dp2, dp3, etc.
   paper-size: "a4",
   page-numbering-position: "center", // "book" or "center" (default: "center")
-  evidence-number: "FIIT-XXXX-XXXXX",
+  evidence-number: "FIIT-XXXXX-XXXXXX",
   title: (en: "The title of the thesis", sk: "Názov práce"),
   author: "Placeholder for name", // "name surname" with titles in double quotes
   thesis-supervisor-name: "Placeholder for name", // "name surname" with titles in double quotes
   departmental-advisor: "Placeholder for name",
   study-program: (en: "Informatics", sk: "Informatika"),
   study-field: "9.2.1 Computer Science / 9.2.1 Informatika",
-  workplace: "Institute of Computer Engineering and Applied Informatics, FIIT STU, Bratislava",
+  workplace: "Institute of Computer ... / Ústav počítačového ...",
   date: (en: "20xx, May", sk: "Máj 20xx"),
   assignment: none,
   bibliography: none,
@@ -181,8 +137,7 @@
     }
 
     if it.level == 1 {
-      // start each new chapter (1st level heading) on odd page like in a book
-      pagebreak(to: "odd", weak: true)
+      // start each new chapter (1st level heading)
       set text(size: 23pt)
       show: block.with(above: 15pt, below: 2em, sticky: true)
       if it.numbering != none {
@@ -202,7 +157,7 @@
       it
     }
   }
-  // ========== END OF GENRAL SETUP ===============
+  // ========== END OF GENERAL SETUP ===============
 
   // cover page
   [
@@ -371,26 +326,26 @@
   }
 
   outline(title: lang((en: "Contents", sk: "Obsah")), indent: auto)
-  pagebreak(to: "odd")
+  page-break()
 
   // list of abbreviations
   if list-of-abbrev != none [
     #set heading(numbering: none, outlined: false)
     = #lang((en: "List of abbreviations", sk: "Zoznam použitých skratiek"))
     #list-of-abbrev
-    #pagebreak(to: "odd")
+    #page-break()
   ]
 
   // list of figures
   if list-of-figures [
     #outline(title: lang((en: "List of Figures", sk: "Zoznam použitých obrázkov")), target: figure.where(kind: image))
-    #pagebreak(to: "odd")
+    #page-break()
   ]
 
   // list of tables
   if list-of-tables [
     #outline(title: lang((en: "List of Tables", sk: "Zoznam použitých tabuliek")), target: figure.where(kind: table))
-    #pagebreak(to: "odd")
+    #page-break()
   ]
 
   // paragraph setting for the body of the thesis
@@ -400,22 +355,46 @@
 
   // display bibliography
   set heading(numbering: none, outlined: true)
-  // set page(numbering: none)
   bibliography
 
-  // appendices
-  [
-    // #set heading(numbering: numbly(
-    //   "Appendix {1:A}.", // use {level:format} to specify the format
-    //   "{1:A}.{2}", // if format is not specified, arabic numbers will be used
-    //   "{1:A}.{2}.{3}", // here, we only want the 3rd level
-    // ))
+  // appendices (1)
+  // reset the general heading setup from the start of the document to not break the appendices
+  // heading setup
+  show heading: it => {
+    // find out the final number of the heading counter
+    let levels = counter(heading).get()
+    let deepest = if levels != () {
+      levels.last()
+    } else {
+      1
+    }
 
+    if it.level == 1 {
+      // start each new chapter (1st level heading)
+      set text(size: 23pt)
+      show: block.with(above: 15pt, below: 2em, sticky: true)
+      if it.numbering != none {
+        numbering("A", deepest)
+        h(7pt, weak: true)
+      }
+      it.body
+    } else if it.level == 2 {
+      set text(size: 16pt)
+      show: block.with(above: 30pt, below: 1.75em, sticky: true)
+      it
+    } else if it.level == 3 {
+      set text(size: 14pt)
+      show: block.with(above: 30pt, below: 1.5em, sticky: true)
+      it
+    } else {
+      it
+    }
+  }
 
-    // #set heading(numbering: none, outlined: true)
-    #set heading(numbering: "A.1", outlined: true)
-    #set page(numbering: "A-1")
-    #set figure(outlined: false)
-    #appendices
-  ]
+  // appendices (2)
+  set page(numbering: "A-1")
+  set heading(numbering: "A.1.1", outlined: true)
+  counter(page).update(1)
+  counter(heading).update(0)
+  appendices
 }

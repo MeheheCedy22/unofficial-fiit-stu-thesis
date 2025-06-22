@@ -1,4 +1,4 @@
-#import "thesis-template/lib.typ": thesis
+#import "thesis-template/lib.typ": thesis, page-break
 #import "@preview/wordometer:0.1.4": word-count, total-words
 // import preliminaries
 #import "thesis-template/preliminaries/annotation.typ": annotations-content
@@ -10,23 +10,23 @@
 
 #show: thesis.with(
   thesis-lang: "en", // For Slovak use "sk"
-  thesis-type: "bp1", // bp1, bp2, dp1, dp2, dp3, etc.
+  thesis-type: "dp1", // bp1, bp2, dp1, dp2, dp3, etc.
   paper-size: "a4",
   page-numbering-position: "center", // "book" or "center" (default: "center")
-  evidence-number: "FIIT-XXXX-XXXXX",
+  evidence-number: "FIIT-XXXXX-XXXXXX",
   title: (en: "The title of the thesis", sk: "Názov práce"),
-  author: "Janko Mrkvicka", // name with titles
+  author: "Bc. Antonio Margheriti", // name with titles
   thesis-supervisor-name: "Ing. Enzo Gorlomi, PhD.", // name with titles
 
   // departmental-advisor == pedagogical supervisor == pedagogický vedúci
   // if you dont have additional supervisor set `departmental-advisor` to `none`
-  departmental-advisor: "doc. Ing. Dominick DeCocco, PhD.", // name with titles
+  departmental-advisor: "doc. Ing. Dominick Decocco, PhD.", // name with titles
   study-program: (en: "Informatics", sk: "Informatika"),
 
   // input 'study-field' and 'workplace' parameters in language of your thesis (used only once in document)
   study-field: "9.2.1 Computer Science / 9.2.1 Informatika",
-  workplace: "Institute of Computer ... / Ústav počítačového ...",
-  date: (en: "2025, January", sk: "Január 2025"),
+  workplace: "Institute of Computer Engineering and Applied Informatics, FIIT STU, Bratislava",
+  date: (en: "2026, May", sk: "Máj 2026"),
 
   // uncomment line below and enter relative path to assignment file which must be in `.pdf` format
   // assignment: "../assets/assignment.pdf",
@@ -60,15 +60,15 @@
 
   // appendices needs to be written here manually to not break other things (for now)
   appendices: [
-    #counter(page).update(0)
-    #counter(heading).update(0)
+    // do not show figures from appendices in the list of figures/tables
+    #set figure(outlined: false)
 
     #include "thesis-template/appendices/schedule.typ"
-
+    #page-break()
     #include "thesis-template/appendices/cd_rom.typ"
-
+    #page-break()
     #include "thesis-template/appendices/AI_use.typ"
-
+    #page-break()
     #include "thesis-template/appendices/appendix.typ"
   ],
 )
@@ -76,18 +76,30 @@
 #counter(page).update(1)
 
 // =============== HERE YOU CAN START WRITING YOUR THESIS ===============
+
+// NOTES:
+
 // it is recommended to use chapters as separate files for better organization
+// each "chapter file" should contain only one 1st level heading
+// after each #include of chapter file, you should also call `#page-break()` function
+
+// `#page-break()` is a custom function that disables page numbering, inserts a page break and then enables page numbering back
+// it still accepts parameters as the original `pagebreak()` function
+// it default to book style values
+
 
 #include "thesis-template/chapters/introduction.typ"
-
+#page-break()
 #include "thesis-template/chapters/analysis.typ"
-
+#page-break()
 #include "thesis-template/chapters/evaluation.typ"
-
+#page-break()
 #include "thesis-template/chapters/related_work.typ"
-
+#page-break()
 #include "thesis-template/chapters/conclusion.typ"
+#page-break()
 
 // as well as Literature/References Resumé is not numbered
 #set heading(numbering: none)
 #include "thesis-template/chapters/resume.typ"
+#page-break()

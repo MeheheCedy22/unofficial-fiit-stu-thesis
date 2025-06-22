@@ -14,11 +14,11 @@
 - [x] fix 2nd and deeper level headings to not show or show properly in Table of Contents for appendices
 - [x] turn off resume heading numbering
 - [x] create better organizational strucutre for the `.typ` content files (chapters, appendices, preliminaries, etc.)
+- [x] fix page numbering to now show on blank pages before ToC (Table of Contents) and Introduction (on blank pages in general)
+- [x] rework how the appendices are handled and imported to the document
+- [x] fix heading numbering of appendices (just 1st lvl heading) (ToC is OKAY)
 
 ## TODOs
 - [ ] make page numbering position parameter to choose the numbering to be like in a book (on specific side when page is even/odd) or in the middle for just digital version
     - [x] just added the param however not implemented yet
-- [ ] rework how the appendices are handled and imported to the document
 - [ ] fix page numbering of appendices
-- [ ] fix heading numbering of appendices (just 1st lvl heading) (ToC is OKAY)
-- [ ] fix page numbering to now show on blank pages before ToC (Table of Contents) and Introduction (on blank pages in general)
