@@ -137,7 +137,7 @@
       show: block.with(above: 15pt, below: 2em, sticky: true)
       if it.numbering != none {
         numbering("1", deepest)
-        h(7pt, weak: true)
+        h(0.75em, weak: true)
       }
       it.body
     } else if it.level == 2 {
@@ -367,13 +367,11 @@
 
   show heading.where(level: 1): it => {
     page-break()
-    counter(page).update(1)
-    pagebreak(weak: true)
     set text(size: 23pt)
     show: block.with(above: 15pt, below: 2em, sticky: true)
     if it.numbering != none {
       numbering("A", counter(heading).get().at(0, default: 0))
-      h(7pt, weak: true)
+      h(0.75em, weak: true)
     }
     it.body
   }
@@ -389,5 +387,6 @@
     it
   }
 
+  counter(page).update(0)
   appendices
 }
