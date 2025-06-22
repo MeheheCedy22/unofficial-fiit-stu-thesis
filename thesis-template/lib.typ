@@ -59,7 +59,7 @@
   set document(title: lang(title), author: author)
   set page(paper: paper-size)
   set text(font: "STIX Two Text", size: 12pt, spacing: 0.35em)
-  set list(indent: 10pt, body-indent: 9pt, marker: ([•], [–], [∗]))
+  set list(indent: 10pt, body-indent: 9pt, marker: ([•], [--], [∗]))
   set enum(indent: 10pt, body-indent: 9pt, numbering: "1)a)i)")
 
   set std.bibliography(title: text(1em)[#lang(supplemets.at("bib-name"))], style: bib-style)
@@ -393,7 +393,7 @@
   // appendices (2)
   set page(numbering: "A-1")
   set heading(numbering: "A.1.1", outlined: true)
-  counter(page).update(1)
+  counter(page).update(0)
   counter(heading).update(0)
   appendices
 }
