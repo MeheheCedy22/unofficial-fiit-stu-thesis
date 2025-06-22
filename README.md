@@ -39,11 +39,10 @@ If you want to help with perfecting this template, feel free to create an issue 
 ## Credits
 
 - [Unofficial FIIT STU LaTeX Template](https://www.overleaf.com/latex/templates/stu-fiit-bachelor-thesis-template-slovak-university-of-technology/pppyykvvhqgq)
-- [Official FIIT STU thesis guidelines](https://www.fiit.stuba.sk/studium/bakalarsky-projekt/bp.html?page_id=1862)
-- [Official FIIT STU thesis guidelines (PDF example)](https://www.fiit.stuba.sk/buxus/docs/organizacia_studia/pokyny/ZP-clenenie-pokyny_2022.pdf)
-- [charged-ieee Typst package](https://typst.app/universe/package/charged-ieee)
-- [wordometer Typst package](https://typst.app/universe/package/wordometer/)
-- [muchpdf Typst package](https://typst.app/universe/package/muchpdf/)
+- [Official FIIT STU thesis guidelines](https://www.fiit.stuba.sk/studium/bakalarsky-projekt/bp.html?page_id=1862) ([PDF example](https://www.fiit.stuba.sk/buxus/docs/organizacia_studia/pokyny/ZP-clenenie-pokyny_2022.pdf))
+- [charged-ieee Typst package](https://typst.app/universe/package/charged-ieee) - Inspiration for this template
+- [wordometer Typst package](https://typst.app/universe/package/wordometer/) - Used package for word count
+- [muchpdf Typst package](https://typst.app/universe/package/muchpdf/) - Used package for PDF inclusion
 
 ## License
 
