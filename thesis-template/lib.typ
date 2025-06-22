@@ -355,45 +355,38 @@
   set heading(numbering: none, outlined: true)
   bibliography
 
-  // appendices (1)
-  // reset the general heading setup from the start of the document to not break the appendices
-  // heading setup
-  show heading: it => {
-    // find out the final number of the heading counter
-    let levels = counter(heading).get()
-    let deepest = if levels != () {
-      levels.last()
-    } else {
-      1
-    }
-
-    if it.level == 1 {
-      // start each new chapter (1st level heading) on odd page like in a book
-      page-break()
-      set text(size: 23pt)
-      show: block.with(above: 15pt, below: 2em, sticky: true)
-      if it.numbering != none {
-        numbering("A", deepest)
-        h(7pt, weak: true)
+  // appendices
+  set page(
+    numbering: (..nums) => {
+      let h = counter(heading).get()
+      if h.len() > 0 {
+        let letter = numbering("A", h.at(0))
+        return letter + "-" + str(nums.at(0))
       }
-      it.body
-    } else if it.level == 2 {
-      set text(size: 16pt)
-      show: block.with(above: 30pt, below: 1.75em, sticky: true)
-      it
-    } else if it.level == 3 {
-      set text(size: 14pt)
-      show: block.with(above: 30pt, below: 1.5em, sticky: true)
-      it
-    } else {
-      it
+      return "A-" + str(nums.at(0))
+    },
+  )
+
+  set heading(numbering: "A.1.1", outlined: true)
+  counter(heading).update(0)
+
+  // Reset page counter at each new appendix section
+  show heading.where(level: 1): it => {
+    // Force a page break first
+    pagebreak(weak: true)
+
+    // Reset the page counter for EVERY appendix section
+    counter(page).update(1)
+
+    // Render the heading
+    set text(size: 23pt)
+    show: block.with(above: 15pt, below: 2em, sticky: true)
+    if it.numbering != none {
+      numbering("A", counter(heading).get().at(0, default: 0))
+      h(7pt, weak: true)
     }
+    it.body
   }
 
-  // appendices (2)
-  set page(numbering: "A-1")
-  set heading(numbering: "A.1.1", outlined: true)
-  counter(page).update(0)
-  counter(heading).update(0)
   appendices
 }
