@@ -137,7 +137,8 @@
     }
 
     if it.level == 1 {
-      // start each new chapter (1st level heading)
+      // start each new chapter (1st level heading) on odd page like in a book
+      page-break()
       set text(size: 23pt)
       show: block.with(above: 15pt, below: 2em, sticky: true)
       if it.numbering != none {
@@ -314,7 +315,7 @@
   annotate("en")
   pagebreak(to: "odd")
 
-  // table of contents
+  // table of contents (1)
   set page(numbering: "I")
   // make 1st level headings bold in the outline
   show outline.entry: it => {
@@ -325,27 +326,24 @@
     }
   }
 
+  // table of contents (2)
   outline(title: lang((en: "Contents", sk: "Obsah")), indent: auto)
-  page-break()
 
   // list of abbreviations
   if list-of-abbrev != none [
     #set heading(numbering: none, outlined: false)
     = #lang((en: "List of abbreviations", sk: "Zoznam použitých skratiek"))
     #list-of-abbrev
-    #page-break()
   ]
 
   // list of figures
   if list-of-figures [
     #outline(title: lang((en: "List of Figures", sk: "Zoznam použitých obrázkov")), target: figure.where(kind: image))
-    #page-break()
   ]
 
   // list of tables
   if list-of-tables [
     #outline(title: lang((en: "List of Tables", sk: "Zoznam použitých tabuliek")), target: figure.where(kind: table))
-    #page-break()
   ]
 
   // paragraph setting for the body of the thesis
@@ -370,7 +368,8 @@
     }
 
     if it.level == 1 {
-      // start each new chapter (1st level heading)
+      // start each new chapter (1st level heading) on odd page like in a book
+      page-break()
       set text(size: 23pt)
       show: block.with(above: 15pt, below: 2em, sticky: true)
       if it.numbering != none {

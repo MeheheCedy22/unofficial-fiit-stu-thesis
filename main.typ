@@ -64,16 +64,13 @@
     #set figure(outlined: false)
 
     #include "thesis-template/appendices/schedule.typ"
-    #page-break()
     #include "thesis-template/appendices/cd_rom.typ"
-    #page-break()
     #include "thesis-template/appendices/AI_use.typ"
-    #page-break()
     #include "thesis-template/appendices/appendix.typ"
   ],
 )
 // counter reset
-#counter(page).update(1)
+#counter(page).update(0)
 
 // =============== HERE YOU CAN START WRITING YOUR THESIS ===============
 
@@ -81,25 +78,17 @@
 
 // it is recommended to use chapters as separate files for better organization
 // each "chapter file" should contain only one 1st level heading
-// after each #include of chapter file, you should also call `#page-break()` function
 
 // `#page-break()` is a custom function that disables page numbering, inserts a page break and then enables page numbering back
 // it still accepts parameters as the original `pagebreak()` function
 // it default to book style values
 
-
 #include "thesis-template/chapters/introduction.typ"
-#page-break()
 #include "thesis-template/chapters/analysis.typ"
-#page-break()
 #include "thesis-template/chapters/evaluation.typ"
-#page-break()
 #include "thesis-template/chapters/related_work.typ"
-#page-break()
 #include "thesis-template/chapters/conclusion.typ"
-#page-break()
 
 // as well as Literature/References Resumé is not numbered
 #set heading(numbering: none)
 #include "thesis-template/chapters/resume.typ"
-#page-break()
