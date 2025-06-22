@@ -18,9 +18,9 @@
 - [x] rework how the appendices are handled and imported to the document
 - [x] fix heading numbering of appendices (just 1st lvl heading) (ToC is OKAY)
 - [x] fix page numbering of appendices
+- [x] fix page numbering of appendices in ToC
 
 ## TODOs (sorted by priority)
-- [x] fix page numbering of appendices in ToC
 - [ ] make page numbering position parameter to choose the numbering to be like in a book (on specific side when page is even/odd) or in the middle for just digital version
     - [x] just added the param however not implemented yet
 - [ ] add some guidelines / explanation to README.md

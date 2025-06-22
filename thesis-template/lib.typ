@@ -370,21 +370,10 @@
   set heading(numbering: "A.1.1", outlined: true)
   counter(heading).update(0)
 
-  // Reset page counter at each new appendix section
   show heading.where(level: 1): it => {
-    // Force a page break first
     pagebreak(weak: true)
-
-    // Reset page counter to 1 for each new appendix
     counter(page).update(1)
-
-    // Render the heading
-    set text(size: 23pt)
-    show: block.with(above: 15pt, below: 2em, sticky: true)
-    if it.numbering != none {
-      numbering("A", counter(heading).get().at(0, default: 0))
-      h(7pt, weak: true)
-    }
+    pagebreak(weak: true)
     it.body
   }
 

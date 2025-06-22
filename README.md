@@ -1,9 +1,5 @@
 # Unofficial FIIT STU template for final theses in Typst
 
-<u>***Note:***</u>
-
-**This template is WIP (Work in Progress), contains a lot of things to be fixed and should be used with caution**
-
 ## About
 
 This is an **unofficial** template for [FIIT STU](https://www.fiit.stuba.sk/) students writing their final theses in Typst. It is based on the official FIIT STU thesis guidelines and the unofficial FIIT STU LaTeX template.
