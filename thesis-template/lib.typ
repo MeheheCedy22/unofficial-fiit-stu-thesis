@@ -95,9 +95,9 @@
   // supplement for references and for captions are the same !
   show figure: fig => {
     let prefix = (
-      if fig.kind == table [#lang(supplemets.at("table-supplement"))] else if fig.kind == image [#lang(
-          supplemets.at("figure-supplement"),
-        )] else [#fig.supplement]
+      if fig.kind == table [#lang(supplemets.at("table-supplement"))] else if fig.kind == image [#lang(supplemets.at(
+          "figure-supplement",
+        ))] else [#fig.supplement]
     )
     let numbers = numbering(fig.numbering, ..fig.counter.at(fig.location()))
     show figure.caption: it => [#prefix~#numbers: #it.body]
@@ -113,13 +113,7 @@
   show ref: it => {
     if it.element != none and it.element.func() == math.equation {
       // override equation references
-      link(
-        it.element.location(),
-        numbering(
-          it.element.numbering,
-          ..counter(math.equation).at(it.element.location()),
-        ),
-      )
+      link(it.element.location(), numbering(it.element.numbering, ..counter(math.equation).at(it.element.location())))
     } else {
       // other references as usual
       it
@@ -277,13 +271,15 @@
       (
         en: "Degree course:",
         sk: "Študijný program:",
-      ).at(lang), study-program.at(lang),
+      ).at(lang),
+      study-program.at(lang),
       (en: "Author:", sk: "Autor:").at(lang), author,
       if thesis-type.find("bp") == "bp" [
         #thesis-type-name.at("bp2").at(lang):
       ] else if thesis-type.find("dp") == "dp" [
         #thesis-type-name.at("dp3").at(lang):
-      ], title.at(lang),
+      ],
+      title.at(lang),
       (
         en: "Supervisor:",
         sk: [
@@ -293,13 +289,14 @@
             diplomovej
           ] práce:
         ],
-      ).at(lang), [#thesis-supervisor-name],
+      ).at(lang),
+      [#thesis-supervisor-name],
       ..if departmental-advisor != none {
         (
           (en: "Departmental advisor:", sk: "Pedagogický vedúci:").at(lang),
           departmental-advisor,
         )
-      }
+      },
     )
 
     #set text(size: 12pt)
@@ -356,25 +353,40 @@
   bibliography
 
   // appendices
-  set page(
-    numbering: (..nums) => {
-      let h = counter(heading).get()
-      if h.len() > 0 {
-        let letter = numbering("A", h.at(0))
-        return letter + "-" + str(nums.at(0))
-      }
-      return "A-" + str(nums.at(0))
-    },
-  )
+  set page(numbering: (..nums) => {
+    let h = counter(heading).get()
+    if h.len() > 0 {
+      let letter = numbering("A", h.at(0))
+      return letter + "-" + str(nums.at(0))
+    }
+    return "A-" + str(nums.at(0))
+  })
 
   set heading(numbering: "A.1.1", outlined: true)
   counter(heading).update(0)
 
   show heading.where(level: 1): it => {
-    pagebreak(weak: true)
+    page-break()
     counter(page).update(1)
     pagebreak(weak: true)
+    set text(size: 23pt)
+    show: block.with(above: 15pt, below: 2em, sticky: true)
+    if it.numbering != none {
+      numbering("A", counter(heading).get().at(0, default: 0))
+      h(7pt, weak: true)
+    }
     it.body
+  }
+
+  show heading.where(level: 2): it => {
+    set text(size: 16pt)
+    show: block.with(above: 30pt, below: 1.75em, sticky: true)
+    it
+  }
+  show heading.where(level: 3): it => {
+    set text(size: 14pt)
+    show: block.with(above: 30pt, below: 1.5em, sticky: true)
+    it
   }
 
   appendices

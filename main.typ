@@ -1,5 +1,5 @@
-#import "thesis-template/lib.typ": thesis, page-break
-#import "@preview/wordometer:0.1.4": word-count, total-words
+#import "thesis-template/lib.typ": page-break, thesis
+#import "@preview/wordometer:0.1.4": total-words, word-count
 // import preliminaries
 #import "thesis-template/preliminaries/annotation.typ": annotations-content
 #import "thesis-template/preliminaries/acknowledgement.typ": acknowledgement-content

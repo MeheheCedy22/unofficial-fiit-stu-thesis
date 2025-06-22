@@ -1,13 +1,18 @@
 = Evaluation
+
 #lorem(10)
-@fig:test-image2 shows test image. #lorem(20)
 
-#figure(
-  image("../assets/Test.svg", width: 50%),
-  caption: [Second Test image],
-) <fig:test-image2>
+#text(blue)[
+  @fig:test-image2 shows test image.
+]
+#lorem(20)
 
-@tab:example2 shows example of table in this template. #lorem(10)
+#figure(image("../assets/Test.svg", width: 50%), caption: [Second Test image]) <fig:test-image2>
+
+#text(blue)[
+  @tab:example2 shows example of table in this template.
+]
+#lorem(10)
 
 #figure(
   table(
