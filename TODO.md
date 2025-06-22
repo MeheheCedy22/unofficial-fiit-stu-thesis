@@ -1,6 +1,6 @@
 # Issues and TODOs:
 
-## Fixed issues / Completed tasks
+## Fixed issues / Completed tasks (sorted by completion date)
 - [x] add `none`/`false` option for list of figures (not show if none)
 - [x] add `none`/`false` option for list of tables (not show if none)
 - [x] add `none`/`false` option for list of abbreviations (not show if none)
@@ -17,8 +17,11 @@
 - [x] fix page numbering to now show on blank pages before ToC (Table of Contents) and Introduction (on blank pages in general)
 - [x] rework how the appendices are handled and imported to the document
 - [x] fix heading numbering of appendices (just 1st lvl heading) (ToC is OKAY)
+- [x] fix page numbering of appendices
 
-## TODOs
+## TODOs (sorted by priority)
+- [x] fix page numbering of appendices in ToC
 - [ ] make page numbering position parameter to choose the numbering to be like in a book (on specific side when page is even/odd) or in the middle for just digital version
     - [x] just added the param however not implemented yet
-- [ ] fix page numbering of appendices
+- [ ] add some guidelines / explanation to README.md
+- [ ] add list of features to README.md
