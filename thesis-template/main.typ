@@ -1,9 +1,9 @@
-#import "thesis-template/lib.typ": page-break, thesis
+#import "../lib.typ": page-break, thesis
 #import "@preview/wordometer:0.1.4": total-words, word-count
 // import preliminaries
-#import "thesis-template/preliminaries/annotation.typ": annotations-content
-#import "thesis-template/preliminaries/acknowledgement.typ": acknowledgement-content
-#import "thesis-template/preliminaries/abbreviations.typ": abbreviations-content
+#import "preliminaries/annotation.typ": annotations-content
+#import "preliminaries/acknowledgement.typ": acknowledgement-content
+#import "preliminaries/abbreviations.typ": abbreviations-content
 
 // for counting words
 #show: word-count
@@ -63,10 +63,10 @@
     // do not show figures from appendices in the list of figures/tables
     #set figure(outlined: false)
 
-    #include "thesis-template/appendices/schedule.typ"
-    #include "thesis-template/appendices/cd_rom.typ"
-    #include "thesis-template/appendices/AI_use.typ"
-    #include "thesis-template/appendices/appendix.typ"
+    #include "appendices/schedule.typ"
+    #include "appendices/cd_rom.typ"
+    #include "appendices/AI_use.typ"
+    #include "appendices/appendix.typ"
   ],
 )
 // counter reset
@@ -83,12 +83,12 @@
 // it still accepts parameters as the original `pagebreak()` function
 // it default to book style values
 
-#include "thesis-template/chapters/introduction.typ"
-#include "thesis-template/chapters/analysis.typ"
-#include "thesis-template/chapters/evaluation.typ"
-#include "thesis-template/chapters/related_work.typ"
-#include "thesis-template/chapters/conclusion.typ"
+#include "chapters/introduction.typ"
+#include "chapters/analysis.typ"
+#include "chapters/evaluation.typ"
+#include "chapters/related_work.typ"
+#include "chapters/conclusion.typ"
 
 // as well as Literature/References Resumé is not numbered
 #set heading(numbering: none)
-#include "thesis-template/chapters/resume.typ"
+#include "chapters/resume.typ"

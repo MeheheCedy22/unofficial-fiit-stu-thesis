@@ -1,5 +1,5 @@
 #import "@preview/muchpdf:0.1.0": muchpdf
-#import "translations.typ": *
+#import "thesis-template/translations.typ": *
 
 #let page-break(to: "odd", weak: true) = {
   set page(numbering: none)
