@@ -4,25 +4,25 @@
 
 This is an **unofficial** template for [FIIT STU](https://www.fiit.stuba.sk/) students writing their final theses in Typst. It is based on the official FIIT STU thesis guidelines and the unofficial FIIT STU LaTeX template.
 
-It was created to make writing theses easier with `Typst` rather than `LaTeX` and more accessible to students of the FIIT STU.
+It was created to make writing theses easier with [Typst](https://typst.app/home) rather than `LaTeX` and more accessible to students of the FIIT STU.
 
 ## Installation
 
-For local use, first you need to install Typst. You can find the installation instructions and other usefull information on their [Github repository](https://github.com/typst/typst).
+For local use, first you need to install Typst. You can find the installation instructions and other usefull information on their [Github repository](https://github.com/typst/typst). It is recommended to use `VS Code` with the [tinymist extension](https://marketplace.visualstudio.com/items?itemName=myriad-dreamin.tinymist) for good writing experience, but you can also use any other editor.
 
-If you want to use this template, because it is WIP (Work in Progress) you need to clone this repository and then you can start modying the [main.typ](main.typ) file.
+If you want to use this template, because it has not been yet uploaded to [Typst Universe](https://typst.app/universe/) you need to clone this repository and then you can start modying the `.typ` files mainly [main.typ](./thesis-template/main.typ) and other content files in the [thesis-template](./thesis-template/) directory.
 
-Later on, when the template is more stable, it will be available in the [Typst Universe](https://typst.app/universe/) and you will be able to use it directly from there by importing it as a package.
+When the template will be available on [Typst Universe](https://typst.app/universe/) you will be able to use it directly from there by importing it as a package.
 
-If you do not have or do not want to use Typst locally, you can use the [Typst Web Editor](https://typst.app/). You need to upload the whole project there and after that you will probably need to change the import/include statements in some of the files. Check the webapp for compilation errors where you will see what needs to be changed.
+If you do not have or do not want to use Typst locally, you can use the [Typst Web Editor](https://typst.app/). You need to upload the whole project there and you can start editing the `.typ` files.
 
 ## Usage
 
-Most, if not all of the parameters that you need to set are in the `main.typ` file and are pretty self-explanatory. You can also check the [lib.typ](./thesis-template/lib.typ) file for more information on the document setup.
+Most, if not all of the parameters that you need to set are in the `main.typ` file and are pretty self-explanatory. You can also check the [lib.typ](lib.typ) file for more information on the document setup.
 
-You can change anything anywhere, but be careful with the `lib.typ` file. Even some minor changes can break the whole document if you do not know what you are doing.
+You can change anything anywhere, but be careful with the `lib.typ`. Even some minor changes can break the whole document if you do not know what you are doing.
 
-Example of rendered document can be found in the [main.pdf](main.pdf) file.
+Example of rendered document can be found in the [main.pdf](./thesis-template/main.pdf) file.
 
 ## First time users to Typst
 
@@ -30,7 +30,7 @@ Using Typst is pretty simple, and pretty straightforward. It is basically combin
 
 ## Contributing
 
-If you want to help with perfecting this template, feel free to create an issue or a pull request. Hopefully all issues that need to be fixed are listed in the [TODO.md](TODO.md) file.
+If you want to help with perfecting this template, feel free to create an issue or a pull request. Hopefully all tasks that need to be implemented are listed in the [TODO.md](TODO.md) file.
 
 ## Credits
 
