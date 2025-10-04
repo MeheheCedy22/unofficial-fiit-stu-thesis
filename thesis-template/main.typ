@@ -34,7 +34,7 @@
   // parameter of bibliography function --- full: true -> show all references without citing
   bibliography: bibliography("refs.bib"),
 
-  // style alternative "iso-690-numeric", default: "ieee"
+  // style alternative "iso-690-numeric" or "iso-690-author-date", default: "ieee"
   bib-style: "ieee",
 
   // you still can underline links individually when set to false
