@@ -12,11 +12,11 @@
   thesis-type: "bp1", // bp1, bp2, dp1, dp2, dp3, etc.
   paper-size: "a4",
   page-numbering-position: "center", // "book" or "center" (default: "center")
-  evidence-number: "FIIT-XXXXX-XXXXXX",
+  evidence-number: "FIIT-XXXXX-XXXXXX", // thesis ID number obtained from AIS
   title: (en: "The title of the thesis", sk: "Názov práce"),
-  author: "Placeholder for name", // "name surname" with titles in double quotes
-  thesis-supervisor-name: "Placeholder for name", // "name surname" with titles in double quotes
-  departmental-advisor: "Placeholder for name",
+  author: "Placeholder for author name", // "name surname" with titles in double quotes
+  thesis-supervisor-name: "Placeholder for thesis supervisor name", // "name surname" with titles in double quotes
+  departmental-advisor: "Placeholder for departmental advisor name", // "name surname" with titles in double quotes or `none` if you do not have additional supervisor
   study-program: (en: "Informatics", sk: "Informatika"),
   study-field: "9.2.1 Computer Science / 9.2.1 Informatika",
   workplace: "Institute of Computer ... / Ústav počítačového ...",
@@ -45,6 +45,12 @@
   list-of-figures: true,
   list-of-tables: true,
   appendices: [],
+
+  // TODO: not used yet in the lib.typ code
+  // text sizes
+  main-text-size: 12pt, // the document is tested mainly for default value of this variable which is 12pt
+
+
   body,
 ) = {
   // setting text to selected language for typst paragraph justification (build-in function)
@@ -63,7 +69,7 @@
   set enum(indent: 10pt, body-indent: 9pt, numbering: "1)a)i)")
 
   set std.bibliography(title: text(1em)[#lang(supplemets.at("bib-name"))], style: bib-style)
-  // line spacing (default 0.65em) src: https://github.com/typst/typst/issues/106#issuecomment-1497030336
+  // line spacing {default: set par(leading: 1.5em)} src: https://github.com/typst/typst/issues/106#issuecomment-1497030336
   set par(leading: 1.5em)
   set heading(numbering: "1.1.1.", supplement: lang(supplemets.at("section-supplement")))
 

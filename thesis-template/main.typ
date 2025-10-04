@@ -13,7 +13,7 @@
   thesis-type: "dp1", // bp1, bp2, dp1, dp2, dp3, etc.
   paper-size: "a4",
   page-numbering-position: "center", // "book" or "center" (default: "center")
-  evidence-number: "FIIT-XXXXX-XXXXXX",
+  evidence-number: "FIIT-XXXXX-XXXXXX", // thesis ID number obtained from AIS
   title: (en: "The title of the thesis", sk: "Názov práce"),
   author: "Bc. Antonio Margheriti", // name with titles
   thesis-supervisor-name: "Ing. Enzo Gorlomi, PhD.", // name with titles
