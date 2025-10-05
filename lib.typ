@@ -69,7 +69,7 @@
   set enum(indent: 10pt, body-indent: 9pt, numbering: "1)a)i)")
 
   set std.bibliography(title: text(1em)[#lang(supplemets.at("bib-name"))], style: bib-style)
-  // line spacing {default: set par(leading: 1.5em)} src: https://github.com/typst/typst/issues/106#issuecomment-1497030336
+  // line spacing {default: set par(leading: 0.65em)} src: https://github.com/typst/typst/issues/106#issuecomment-1497030336
   set par(leading: 1.5em)
   set heading(numbering: "1.1.1.", supplement: lang(supplemets.at("section-supplement")))
 
