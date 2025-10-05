@@ -1,8 +1,14 @@
+# main.pdf is also ignored to not commit always when the file is saved
+# if you want to publish the template/thesis, rename main.pdf to thesis.pdf
 *.pdf
+!thesis.pdf
+
 *.txt
 *.jpg
 *.jpeg
 *.png
 *.svg
+
+# Exclude assets
+
 !thesis-template/assets/**
-!main.pdf
