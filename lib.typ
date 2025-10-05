@@ -324,6 +324,11 @@
   show outline.entry: it => {
     if it.element != none and it.element.func() == heading and it.level == 1 {
       strong(it)
+
+      // show "Appendices" section" after References if there are appendices
+      if it.element.body.func() != text and appendices != [] {
+        strong(lang(supplemets.at("appendix-supplement-plural")))
+      }
     } else {
       it
     }
@@ -376,10 +381,10 @@
     set text(size: 23pt)
     show: block.with(above: 15pt, below: 2em, sticky: true)
     if it.numbering != none {
-      numbering("A", counter(heading).get().at(0, default: 0))
+      text(lang(supplemets.at("appendix-supplement-singular"))) + text(" ") + numbering("A", counter(heading).get().at(0, default: 0))
       h(0.75em, weak: true)
     }
-    it.body
+    [\ \ #it.body]
   }
 
   show heading.where(level: 2): it => {

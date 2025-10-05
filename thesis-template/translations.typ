@@ -46,4 +46,12 @@
     en: "Section",
     sk: "Sekcia",
   ),
+  appendix-supplement-singular: (
+    en: "Appendix",
+    sk: "Príloha",
+  ),
+  appendix-supplement-plural: (
+    en: "Appendices",
+    sk: "Prílohy",
+  ),
 )
