@@ -3,14 +3,20 @@
 #lorem(10)
 
 #text(blue)[
-  @fig:test-image2 shows test image.
+  @fig:test-image-eval shows test image.
 ]
 #lorem(20)
 
-#figure(image("../assets/Test.svg", width: 50%), caption: [Second Test image]) <fig:test-image2>
+#figure(image("../assets/Test.svg", width: 50%), caption: [Second Test image]) <fig:test-image-eval>
+
+#figure(image("../assets/Test.svg", width: 25%), caption: [Test image]) <fig:test-image-zxvc>
 
 #text(blue)[
-  @tab:example2 shows example of table in this template.
+  Referencing image @fig:test-image-zxvc.
+]
+
+#text(blue)[
+  @tab:example-eval shows example of table in this template.
 ]
 #lorem(10)
 
@@ -21,7 +27,7 @@
     [Row 1], [Content], [Content],
     [Row 2], [Content], [Content],
   ),
-  caption: [Example 2 of a Table],
-) <tab:example2>
+  caption: [Another Example of a Table],
+) <tab:example-eval>
 
 #lorem(100)

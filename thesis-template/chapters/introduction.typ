@@ -9,6 +9,8 @@
 ]
 #lorem(10)
 
+To showcase table/figure numbering here are some figures and tables.
+
 #figure(
   table(
     columns: 3,
@@ -19,6 +21,30 @@
   caption: [Example of a Table],
 ) <tab:example>
 
+#figure(
+  table(
+    columns: 3,
+    [], [*Col 1*], [*Col 2*],
+    [Row 1], [Content], [Content],
+    [Row 2], [Content], [Content],
+  ),
+  caption: [Example of a Table 2],
+) <tab:example2>
+
+#figure(
+  table(
+    columns: 3,
+    [], [*Col 1*], [*Col 2*],
+    [Row 1], [Content], [Content],
+    [Row 2], [Content], [Content],
+  ),
+  caption: [Example of a Table 3],
+) <tab:example3>
+
+#text(blue)[
+  Referencing tables @tab:example, @tab:example2, and @tab:example3.
+]
+
 #lorem(20)
 
 #text(blue)[
@@ -27,6 +53,12 @@
 #lorem(20)
 
 #figure(image("../assets/Test.svg", width: 50%), caption: [Test image]) <fig:test-image>
+#figure(image("../assets/Test.svg", width: 25%), caption: [Test image 2]) <fig:test-image2>
+#figure(image("../assets/Test.svg", width: 25%), caption: [Test image 3]) <fig:test-image3>
+
+#text(blue)[
+  Referencing images @fig:test-image2 and @fig:test-image3.
+]
 
 == Typst equation showcase (\<- explainer)
 
