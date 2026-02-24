@@ -6,13 +6,13 @@
   There are a testing image in appendix.
 ]
 
-#figure(image("../assets/Test.svg", width: 30%), caption: [Appendix Test image]) <fig:appendix-test-image1>
+#figure(image("../assets/Test.svg", width: 30%), caption: [Test image 1 (appendix)]) <fig:example_image1_appendix>
 
-#figure(image("../assets/Test.svg", width: 45%), caption: [Appendix Test image]) <fig:appendix-test-image2>
+#figure(image("../assets/Test.svg", width: 45%), caption: [Test image 2 (appendix)]) <fig:example_image2_appendix>
 
 
 #text(blue)[
-  Referencing images @fig:appendix-test-image1 and @fig:appendix-test-image2.
+  Referencing images @fig:example_image1_appendix and @fig:example_image2_appendix.
 ]
 
 #figure(
@@ -22,8 +22,8 @@
     [Row 1], [Content], [Content],
     [Row 2], [Content], [Content],
   ),
-  caption: [Example of a Table],
-) <tab:example-fgh>
+  caption: [Example of a Table 1 (appendix)],
+) <tab:example_table1_appendix>
 
 #figure(
   table(
@@ -32,8 +32,8 @@
     [Row 1], [Content], [Content],
     [Row 2], [Content], [Content],
   ),
-  caption: [Example of a Table 2],
-) <tab:example-rty>
+  caption: [Example of a Table 2 (appendix)],
+) <tab:example_table2_appendix>
 
 #figure(
   table(
@@ -42,9 +42,9 @@
     [Row 1], [Content], [Content],
     [Row 2], [Content], [Content],
   ),
-  caption: [Example of a Table 3],
-) <tab:example-cvb>
+  caption: [Example of a Table 3 (appendix)],
+) <tab:example_table3_appendix>
 
 #text(blue)[
-  Referencing tables @tab:example-fgh, @tab:example-rty, and @tab:example-cvb.
+  Referencing tables @tab:example_table1_appendix, @tab:example_table2_appendix, and @tab:example_table3_appendix.
 ]

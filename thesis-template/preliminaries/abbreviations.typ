@@ -1,4 +1,4 @@
-// NOTE: if not `none` the heading is present, just fill this table
+// NOTE: if not set to `none`, the heading is present, just fill this table
 #let abbreviations-content = [
   #table(
     // setup

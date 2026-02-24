@@ -24,12 +24,13 @@
 - [x] add word appendix before the appendix title in ToC and also in the document heading
 
 ## TODOs (sorted by priority - first is most important)
+- [ ] make the numbering for figures (images and tables) to start with the chapter number (e.g. 1.1, 1.2, 2.1, etc.)
+  - [ ] fix the numbering for figures and tables in text when referencing them (it is correct in LoF/LoT and in captions)
+  - [ ] fix figure and table numbering in appendices (captions)
+  - [ ] add colon after the numbering (e.g. Figure 1.1: Figure title) in List of Figures and List of Tables
 - [ ] add vib/viss/dp0 for (Výskum v .../Research in ...)
   - [ ] this include changes to title page, mainly the evidence number is replaced with Study program
   <!-- - [ ] NOTE: can use plevko's template for inspiration -->
-- [ ] make the numbering for figures (images and tables) to start with the chapter number (e.g. 1.1, 1.2, 2.1, etc.)
-  - [ ] fix figure and table numbering in appendices
-  - [ ] add colon after the numbering (e.g. Figure 1.1: Figure title) in List of figures and List of tables
 - [ ] replace concrete values for text sizes, margins, etc. with variables and make them as parameters for user to change
   - [x] just added 1 param for now and it is not implemented yet
 - [ ] make page numbering position parameter to choose the numbering to be like in a book (on specific side when page is even/odd) or in the middle for just digital version

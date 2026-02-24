@@ -5,7 +5,7 @@
 #lorem(100)
 
 #text(blue)[
-  @tab:example shows example of table in this template.
+  @tab:example_table1_1 shows example of table in this template.
 ]
 #lorem(10)
 
@@ -18,8 +18,8 @@ To showcase table/figure numbering here are some figures and tables.
     [Row 1], [Content], [Content],
     [Row 2], [Content], [Content],
   ),
-  caption: [Example of a Table],
-) <tab:example>
+  caption: [Example of a Table 1 (chapter 1)],
+) <tab:example_table1_1>
 
 #figure(
   table(
@@ -28,8 +28,8 @@ To showcase table/figure numbering here are some figures and tables.
     [Row 1], [Content], [Content],
     [Row 2], [Content], [Content],
   ),
-  caption: [Example of a Table 2],
-) <tab:example2>
+  caption: [Example of a Table 2 (chapter 1)],
+) <tab:example_table1_2>
 
 #figure(
   table(
@@ -38,26 +38,26 @@ To showcase table/figure numbering here are some figures and tables.
     [Row 1], [Content], [Content],
     [Row 2], [Content], [Content],
   ),
-  caption: [Example of a Table 3],
-) <tab:example3>
+  caption: [Example of a Table 3 (chapter 1)],
+) <tab:example_table1_3>
 
 #text(blue)[
-  Referencing tables @tab:example, @tab:example2, and @tab:example3.
+  Referencing tables @tab:example_table1_1, @tab:example_table1_2, and @tab:example_table1_3.
 ]
 
 #lorem(20)
 
 #text(blue)[
-  @fig:test-image shows test image.
+  @fig:example_image1_1 shows example image.
 ]
 #lorem(20)
 
-#figure(image("../assets/Test.svg", width: 50%), caption: [Test image]) <fig:test-image>
-#figure(image("../assets/Test.svg", width: 25%), caption: [Test image 2]) <fig:test-image2>
-#figure(image("../assets/Test.svg", width: 25%), caption: [Test image 3]) <fig:test-image3>
+#figure(image("../assets/Test.svg", width: 50%), caption: [Test image 1 (chapter 1)]) <fig:example_image1_1>
+#figure(image("../assets/Test.svg", width: 25%), caption: [Test image 2 (chapter 1)]) <fig:example_image1_2>
+#figure(image("../assets/Test.svg", width: 25%), caption: [Test image 3 (chapter 1)]) <fig:example_image1_3>
 
 #text(blue)[
-  Referencing images @fig:test-image2 and @fig:test-image3.
+  Referencing images @fig:example_image1_2 and @fig:example_image1_3.
 ]
 
 == Typst equation showcase (\<- explainer)
@@ -71,12 +71,12 @@ To showcase table/figure numbering here are some figures and tables.
 
   $
     H(S) = sum_(n=1)^C -p_i dot log_2(p_i)
-  $ <eq:entropy>
+  $ <eq:example_equation1_1>
 ]
 
 
 #text(blue)[
-  Equation @eq:entropy shows how entropy is calculated. For math symbols check Typst documentation on math/symbols.
+  Equation @eq:example_equation1_1 shows how entropy is calculated. For math symbols check Typst documentation on math/symbols.
 ]
 
 == Another Typst references (\<- explainer)

@@ -8,14 +8,19 @@
 }
 
 #let thesis(
-  thesis-lang: "en", // For Slovak use "sk"
+  thesis-lang: "en", // for Slovak, use "sk"
   thesis-type: "bp1", // bp1, bp2, dp1, dp2, dp3, etc.
   paper-size: "a4",
+  // TODO: not used yet in the lib.typ code
   page-numbering-position: "center", // "book" or "center" (default: "center")
   evidence-number: "FIIT-XXXXX-XXXXXX", // thesis ID number obtained from AIS
-  title: (en: "The title of the thesis", sk: "Názov práce"),
+  title: (
+    en: "The title of the thesis",
+    sk: "Názov práce"
+  ),
   author: "Placeholder for author name", // "name surname" with titles in double quotes
   thesis-supervisor-name: "Placeholder for thesis supervisor name", // "name surname" with titles in double quotes
+  // departmental-advisor == pedagogical supervisor == pedagogický vedúci
   departmental-advisor: "Placeholder for departmental advisor name", // "name surname" with titles in double quotes or `none` if you do not have additional supervisor
   study-program: (en: "Informatics", sk: "Informatika"),
   study-field: "9.2.1 Computer Science / 9.2.1 Informatika",
@@ -45,12 +50,9 @@
   list-of-figures: true,
   list-of-tables: true,
   appendices: [],
-
   // TODO: not used yet in the lib.typ code
   // text sizes
   main-text-size: 12pt, // the document is tested mainly for default value of this variable which is 12pt
-
-
   body,
 ) = {
   // setting text to selected language for typst paragraph justification (build-in function)
@@ -89,8 +91,8 @@
   show figure.where(kind: table): set figure.caption(position: top)
   show figure.where(kind: table): set text(size: 10pt)
 
-  show figure.where(kind: table): set figure(supplement: lang(supplemets.at("table-supplement")), numbering: "1")
-  show figure.where(kind: image): set figure(supplement: lang(supplemets.at("figure-supplement")), numbering: "1")
+  show figure.where(kind: table): set figure(supplement: lang(supplemets.at("table-supplement")), numbering: "1.1")
+  show figure.where(kind: image): set figure(supplement: lang(supplemets.at("figure-supplement")), numbering: "1.1")
 
   show figure.caption: set text(size: 10pt)
   show figure.caption: set align(start)
@@ -101,14 +103,30 @@
   // supplement for references and for captions are the same !
   show figure: fig => {
     let prefix = (
-      if fig.kind == table [#lang(supplemets.at("table-supplement"))] else if fig.kind == image [#lang(supplemets.at(
+      if fig.kind == table [#lang(supplemets.at("table-supplement"))] else if fig.kind == image [#lang(
+        supplemets.at(
           "figure-supplement",
-        ))] else [#fig.supplement]
+        ),
+      )] else [#fig.supplement]
     )
+
+    let heading-levels = counter(heading).get().first()
     let numbers = numbering(fig.numbering, ..fig.counter.at(fig.location()))
-    show figure.caption: it => [#prefix~#numbers: #it.body]
+
+    show figure.caption: it => [#prefix~#heading-levels\.#numbers: #it.body]
     fig
   }
+
+  // ------------- INFO FIGURE AND TABLE COUNTING ----------
+  // show heading.where(level: 1): it => {
+  //   counter(figure.where(kind: image)).update(0)
+  //   counter(figure.where(kind: table)).update(0)
+  //   it
+  // }
+  // set figure(numbering: (..num) =>
+  //   numbering("1.1", counter(heading).get().first(), num.pos().first())
+  // )
+  // -------------------------------------------------------
 
   // references setup
   // configure equation numbering and spacing
@@ -139,6 +157,12 @@
     if it.level == 1 {
       // start each new chapter (1st level heading) on odd page like in a book
       page-break()
+
+
+      counter(figure.where(kind: image)).update(0)
+      counter(figure.where(kind: table)).update(0)
+
+
       set text(size: 23pt)
       show: block.with(above: 15pt, below: 2em, sticky: true)
       if it.numbering != none {
@@ -176,9 +200,9 @@
     #set text(12pt)
     #lang(thesis-type-name.at(thesis-type))
     #set align(left + bottom)
-    #lang((en: "Supervisor", sk: "Vedúci práce")): #thesis-supervisor-name \
+    #lang(supervisor-str): #thesis-supervisor-name \
     #if departmental-advisor != none [
-      #lang((en: "Departmental advisor", sk: "Pedagogický vedúci")): #departmental-advisor \
+      #lang(departmental-advisor-str): #departmental-advisor \
     ]
     #lang(date) \
   ]
@@ -200,12 +224,12 @@
     #set text(12pt)
     #lang(thesis-type-name.at(thesis-type))
     #set align(left + bottom)
-    #lang((en: "Study program", sk: "Študijný program")): #lang(study-program) \
-    #lang((en: "Study field", sk: "Študijný odbor")): #study-field \
-    #lang((en: "Training workplace", sk: "Miesto vypracovania")): #workplace \
-    #lang((en: "Supervisor", sk: "Vedúci práce")): #thesis-supervisor-name \
+    #lang(study-program-str): #lang(study-program) \
+    #lang(study-field-str): #study-field \
+    #lang(training-workplace-str): #workplace \
+    #lang(supervisor-str): #thesis-supervisor-name \
     #if departmental-advisor != none [
-      #lang((en: "Departmental advisor", sk: "Pedagogický vedúci")): #departmental-advisor \
+      #lang(departmental-advisor-str): #departmental-advisor \
     ]
     #lang(date) \
   ]
@@ -225,18 +249,9 @@
   // honest declaration
   [
     #set align(bottom)
-    #lang((
-      en: [
-        I honestly declare that I prepared this thesis independently, on
-        the basis of consultations and using the cited literature.
-      ],
-      sk: [
-        Čestne vyhlasujem, že som túto prácu vypracoval(a) samostatne, na
-        základe konzultácií a s použitím uvedenej literatúry.
-      ],
-    ))
+    #lang(honest-declaration)
     #v(3em)
-    #lang((en: "In Bratislava", sk: "V Bratislave")), #lang(date)
+    #lang(in-place), #lang(date)
     #set align(right)
     #v(2em)
     #for letter in author {
@@ -250,7 +265,7 @@
   // acknowledgement
   [
     #set text(size: 17pt)
-    *#lang((en: "Acknowledgement", sk: "Poďakovanie"))* \
+    *#lang(acknowledgement-str)* \
     #v(10pt)
     #set text(size: 12pt)
     #set par(leading: 1.5em, justify: true)
@@ -258,14 +273,15 @@
   ]
   pagebreak(to: "odd")
 
-  let annotate(lang) = block[
+  // annotation is done in special way because it is included in both languages regardless of the thesis language
+  let annotate(lang-anotate) = block[
     #set text(size: 17pt)
-    *#(en: "Annotation", sk: "Anotácia").at(lang)* \
+    *#(en: "Annotation", sk: "Anotácia").at(lang-anotate)* \
     #v(10pt)
     #set text(size: 12pt)
     #set par(leading: 1.4em)
-    #university.at(lang) \
-    #upper[#faculty.at(lang)] \
+    #university.at(lang-anotate) \
+    #upper[#faculty.at(lang-anotate)] \
 
     #table(
       // setup
@@ -273,19 +289,18 @@
       align: left,
       stroke: none,
       columns: 2,
-      // content
-      (
-        en: "Degree course:",
-        sk: "Študijný program:",
-      ).at(lang),
-      study-program.at(lang),
-      (en: "Author:", sk: "Autor:").at(lang), author,
+      // content (1 row divided by \n in the code for better clarity)
+      (en: "Degree course:", sk: "Študijný program:").at(lang-anotate), study-program.at(lang-anotate),
+
+      (en: "Author:", sk: "Autor:").at(lang-anotate), author,
+
       if thesis-type.find("bp") == "bp" [
-        #thesis-type-name.at("bp2").at(lang):
+        #thesis-type-name.at("bp2").at(lang-anotate):
       ] else if thesis-type.find("dp") == "dp" [
-        #thesis-type-name.at("dp3").at(lang):
+        #thesis-type-name.at("dp3").at(lang-anotate):
       ],
-      title.at(lang),
+      title.at(lang-anotate),
+
       (
         en: "Supervisor:",
         sk: [
@@ -295,11 +310,12 @@
             diplomovej
           ] práce:
         ],
-      ).at(lang),
+      ).at(lang-anotate),
       [#thesis-supervisor-name],
+
       ..if departmental-advisor != none {
         (
-          (en: "Departmental advisor:", sk: "Pedagogický vedúci:").at(lang),
+          (en: "Departmental advisor:", sk: "Pedagogický vedúci:").at(lang-anotate),
           departmental-advisor,
         )
       },
@@ -307,9 +323,9 @@
 
     #set text(size: 12pt)
     #set par(leading: 1.4em, justify: true)
-    #date.at(lang)
+    #date.at(lang-anotate)
     #v(1em)
-    #annotations.at(lang)
+    #annotations.at(lang-anotate)
   ]
 
   annotate("sk")
@@ -335,23 +351,23 @@
   }
 
   // table of contents (2)
-  outline(title: lang((en: "Contents", sk: "Obsah")), indent: auto)
+  outline(title: lang(toc-str), indent: auto)
 
   // list of abbreviations
   if list-of-abbrev != none [
     #set heading(numbering: none, outlined: false)
-    = #lang((en: "List of abbreviations", sk: "Zoznam použitých skratiek"))
+    = #lang(list-of-abbrev-str)
     #list-of-abbrev
   ]
 
   // list of figures
   if list-of-figures [
-    #outline(title: lang((en: "List of Figures", sk: "Zoznam použitých obrázkov")), target: figure.where(kind: image))
+    #outline(title: lang(list-of-figures-str), target: figure.where(kind: image))
   ]
 
   // list of tables
   if list-of-tables [
-    #outline(title: lang((en: "List of Tables", sk: "Zoznam použitých tabuliek")), target: figure.where(kind: table))
+    #outline(title: lang(list-of-tables-str), target: figure.where(kind: table))
   ]
 
   // paragraph setting for the body of the thesis
@@ -381,7 +397,11 @@
     set text(size: 23pt)
     show: block.with(above: 15pt, below: 2em, sticky: true)
     if it.numbering != none {
-      text(lang(supplemets.at("appendix-supplement-singular"))) + text(" ") + numbering("A", counter(heading).get().at(0, default: 0))
+      (
+        text(lang(supplemets.at("appendix-supplement-singular")))
+          + text(" ")
+          + numbering("A", counter(heading).get().at(0, default: 0))
+      )
       h(0.75em, weak: true)
     }
     [\ \ #it.body]
