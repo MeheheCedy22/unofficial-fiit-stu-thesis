@@ -274,32 +274,33 @@
   pagebreak(to: "odd")
 
   // annotation is done in special way because it is included in both languages regardless of the thesis language
-  let annotate(lang-anotate) = block[
+  let annotate(lang-annotate) = block[
     #set text(size: 17pt)
-    *#(en: "Annotation", sk: "Anotácia").at(lang-anotate)* \
+    *#(en: "Annotation", sk: "Anotácia").at(lang-annotate)* \
     #v(10pt)
     #set text(size: 12pt)
-    #set par(leading: 1.4em)
-    #university.at(lang-anotate) \
-    #upper[#faculty.at(lang-anotate)] \
+    #set par(leading: 0.5em)
+    #university.at(lang-annotate) \ \
+    #upper[#faculty.at(lang-annotate)] \
 
     #table(
       // setup
       inset: (left: 0pt, right: 3em),
       align: left,
+      row-gutter: 0.5em,
       stroke: none,
       columns: 2,
       // content (1 row divided by \n in the code for better clarity)
-      (en: "Degree course:", sk: "Študijný program:").at(lang-anotate), study-program.at(lang-anotate),
+      (en: "Degree course:", sk: "Študijný program:").at(lang-annotate), study-program.at(lang-annotate),
 
-      (en: "Author:", sk: "Autor:").at(lang-anotate), author,
+      (en: "Author:", sk: "Autor:").at(lang-annotate), author,
 
       if thesis-type.find("bp") == "bp" [
-        #thesis-type-name.at("bp2").at(lang-anotate):
+        #thesis-type-name.at("bp2").at(lang-annotate):
       ] else if thesis-type.find("dp") == "dp" [
-        #thesis-type-name.at("dp3").at(lang-anotate):
+        #thesis-type-name.at("dp3").at(lang-annotate):
       ],
-      title.at(lang-anotate),
+      title.at(lang-annotate),
 
       (
         en: "Supervisor:",
@@ -310,12 +311,12 @@
             diplomovej
           ] práce:
         ],
-      ).at(lang-anotate),
+      ).at(lang-annotate),
       [#thesis-supervisor-name],
 
       ..if departmental-advisor != none {
         (
-          (en: "Departmental advisor:", sk: "Pedagogický vedúci:").at(lang-anotate),
+          (en: "Departmental advisor:", sk: "Pedagogický vedúci:").at(lang-annotate),
           departmental-advisor,
         )
       },
@@ -323,9 +324,9 @@
 
     #set text(size: 12pt)
     #set par(leading: 1.4em, justify: true)
-    #date.at(lang-anotate)
+    #date.at(lang-annotate)
     #v(1em)
-    #annotations.at(lang-anotate)
+    #annotations.at(lang-annotate)
   ]
 
   annotate("sk")
