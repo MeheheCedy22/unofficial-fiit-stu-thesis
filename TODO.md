@@ -28,6 +28,8 @@
   - [ ] fix the numbering for figures and tables in text when referencing them (it is correct in LoF/LoT and in captions)
   - [ ] fix figure and table numbering in appendices (captions)
   - [ ] add colon after the numbering (e.g. Figure 1.1: Figure title) in List of Figures and List of Tables
+- [ ] add honest-declaration as an option in translations
+- [ ] make honest-declaration and acknowledgement sections optional (not show if none, basically just for testing purposes to toggle off)
 - [ ] add vib/viss/dp0 for (Výskum v .../Research in ...)
   - [ ] this include changes to title page, mainly the evidence number is replaced with Study program
   <!-- - [ ] NOTE: can use plevko's template for inspiration -->
