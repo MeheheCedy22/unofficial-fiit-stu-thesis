@@ -377,8 +377,10 @@
   body
 
   // display bibliography
+  set par(spacing: 2em)
   set heading(numbering: none, outlined: true)
   bibliography
+  set par(spacing: 3em, justify: true, leading: 1em)
 
   // appendices
   set page(numbering: (..nums) => {
