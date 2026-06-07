@@ -44,7 +44,7 @@
   bib-style: "ieee",
 
   // you still can underline links individually when set to false
-  underline-links: true, // default true
+  underline-links: false, // default true
 
   annotations: (
     sk: annotations-content.at("sk"),

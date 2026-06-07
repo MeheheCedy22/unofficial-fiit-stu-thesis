@@ -4,6 +4,10 @@
 
 #figure(table(
   columns: 2,
+  align: (x, y) =>
+    if y == 0 { horizon+center }
+    else if x == 0 { horizon+center }
+    else { horizon+left },
   [*Semester week number *], [*Description*],
   [1], [#lorem(8)],
   [2], [#lorem(8)],
@@ -27,6 +31,10 @@
 
 #figure(table(
   columns: 2,
+  align: (x, y) =>
+    if y == 0 { horizon+center }
+    else if x == 0 { horizon+center }
+    else { horizon+left },
   [*Semester week number *], [*Description*],
   [1], [#lorem(8)],
   [2], [#lorem(8)],

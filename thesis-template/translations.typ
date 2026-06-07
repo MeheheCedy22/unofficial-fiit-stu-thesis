@@ -28,8 +28,8 @@
     sk: "Diplomová práca",
   ),
 )
-// supplemets are for references in text but also for the captions
-#let supplemets = (
+// supplements are for references in text but also for the captions
+#let supplements = (
   bib-name: (
     en: "References",
     sk: "Literatúra",

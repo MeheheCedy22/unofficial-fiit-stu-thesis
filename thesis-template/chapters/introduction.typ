@@ -2,6 +2,14 @@
 
 = Introduction <sec:intro>
 
+// you can remove this anytime, it is just for your information and testing for how many words are in this document (idk about accuracy, but seems good)
+// the position in document should not alter the calculation so you can move it anywhere
+#text(red)[
+  Final thesis should have 40 standard pages (recommended). One standard page is defined as 1800 characters per page. This is calculated as 30 rows #sym.times 60 characters per row. You can also calculate it as \~250 words per standard page. This means that you need \~10,000 words for this document.
+
+  There is total of #underline([#total-words / 10000]) words in this document to fullfil the requirements of the thesis. Note that there are so many words because of lorem ipsum text. Also note that the accuracy of the word count is not perfect, but it is good enough for this purpose.
+]
+
 #lorem(100)
 
 #text(blue)[
@@ -9,7 +17,9 @@
 ]
 #lorem(10)
 
-To showcase table/figure numbering here are some figures and tables.
+#text(blue)[
+  To showcase table/figure numbering here are some figures and tables.
+]
 
 #figure(
   table(
@@ -89,29 +99,24 @@ To showcase table/figure numbering here are some figures and tables.
   This is a test cite of more than one reference @vaswani2023attentionneed @einstein2005albert @newton.
 ]
 
-// you can remove this anytime, it is just for your information and testing for how many words are in this document (idk about accuracy, but seems good)
-// the position in document should not alter the calculation so you can move it anywhere
-#text(red)[
-  Bachelor thesis should have 40 standard pages (recommended). One standard page is defined as 1800 characters per page. This is calculated as 30 rows #sym.times 60 characters per row. You can also calculate it as \~250 words per standard page. This means that you need \~10,000 words for this document.
-
-  There is total of #underline([#total-words / 10000]) words in this document to fullfil the requirements of the thesis. Note that there are so many words because of lorem ipsum text. Also note that the accuracy of the word count is not perfect, but it is good enough for this purpose.
-]
-
 #pagebreak()
 
-- Example of bulleted list
-  - indented
-    - more indented
-      - even more
-    - #lorem(4)
-  - #lorem(4)
-- #lorem(4)
-
-+ Example of ordered list
-+ More
-  + indented
-    + even more
-    + more 2
-  + #lorem(4)
-  + #lorem(4)
-+ #lorem(4)
+#text(blue)[
+  - Example of bulleted list
+]
+    - #lorem(5)
+      - #lorem(5)
+        - #lorem(5)
+      - #lorem(5)
+    - #lorem(5)
+  - #lorem(5)
+#text(blue)[
+  + Example of ordered list
+]
+  + #lorem(5)
+    + #lorem(5)
+      + #lorem(5)
+      + #lorem(5)
+    + #lorem(5)
+    + #lorem(5)
+  + #lorem(5)

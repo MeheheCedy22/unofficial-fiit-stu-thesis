@@ -1,4 +1,4 @@
-= Random content which is not part of the thesis
+= Another content which is not part of the thesis
 
 #lorem(100)
 
