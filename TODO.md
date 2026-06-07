@@ -24,10 +24,12 @@
 - [x] add word appendix before the appendix title in ToC and also in the document heading
 
 ## TODOs (sorted by priority - first is most important)
-- [ ] make the numbering for figures (images and tables) to start with the chapter number (e.g. 1.1, 1.2, 2.1, etc.)
-  - [ ] fix the numbering for figures and tables in text when referencing them (it is correct in LoF/LoT and in captions)
+- [x] make the numbering for figures (images and tables) to start with the chapter number (e.g. 1.1, 1.2, 2.1, etc.)
+  - [x] add colon after the numbering (e.g. Figure 1.1: Figure title) in List of Figures and List of Tables
+  - [x] fix the numbering for figures and tables in text when referencing them (it is correct in LoF/LoT and in captions)
+  - [ ] these fixes caused that `underline links` fearure underlines these references in text so that needs to be addressed
   - [ ] fix figure and table numbering in appendices (captions)
-  - [ ] add colon after the numbering (e.g. Figure 1.1: Figure title) in List of Figures and List of Tables
+- [ ] add header for pages to show the chapter name
 - [ ] add honest-declaration as an option in translations
 - [ ] make honest-declaration and acknowledgement sections optional (not show if none, basically just for testing purposes to toggle off)
 - [ ] add vib/viss/dp0 for (Výskum v .../Research in ...)
